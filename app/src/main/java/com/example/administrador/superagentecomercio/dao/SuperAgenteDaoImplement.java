@@ -28,8 +28,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public ArrayList<UbigeoEntity> ListarProvinciaUbigeo(String ubigeo1) {
-        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+    public ArrayList<Ubigeo> ListarProvinciaUbigeo(String ubigeo1) {
+        ArrayList<Ubigeo> listaUsuario = new ArrayList<>();
 
         String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarProvincia/?ubigeo1=" + ubigeo1;
 
@@ -39,7 +39,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                 if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        Ubigeo usuarioEntity = new Ubigeo();
                         usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
                         usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
                         usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
@@ -62,8 +62,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public ArrayList<UbigeoEntity> ListarDistritoUbigeo(String ubigeo1, String ubigeo2) {
-        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+    public ArrayList<Ubigeo> ListarDistritoUbigeo(String ubigeo1, String ubigeo2) {
+        ArrayList<Ubigeo> listaUsuario = new ArrayList<>();
 
         String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarDistrito/?ubigeo1=" + ubigeo1 + "&ubigeo2=" + ubigeo2;
 
@@ -73,7 +73,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                 if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        Ubigeo usuarioEntity = new Ubigeo();
                         usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
                         usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
                         usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
@@ -96,8 +96,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public ArrayList<UbigeoEntity> ListarDepartamento() {
-        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+    public ArrayList<Ubigeo> ListarDepartamento() {
+        ArrayList<Ubigeo> listaUsuario = new ArrayList<>();
 
         String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarDepartamento/?vac03=";
 
@@ -107,7 +107,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                 if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        Ubigeo usuarioEntity = new Ubigeo();
                         usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
                         usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
                         usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
@@ -229,49 +229,6 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         return listaUsuario;
     }
 
-    @Override
-    public ArrayList<Operario> ListadoOperario(String idComercio) {
-        ArrayList<Operario> listaOperario = new ArrayList<>();
-
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarOperarios/?id_COM=" + idComercio;
-
-        try {
-            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null) {
-                if (jsonArray.length() > 0) {
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        Operario operarioEntity = new Operario();
-                        operarioEntity.setId_ope(utils.getValueStringOrNull(jsonObject, "id_ope"));
-                        operarioEntity.setDni_ope(utils.getValueStringOrNull(jsonObject, "dni_ope"));
-                        operarioEntity.setNom_ope(utils.getValueStringOrNull(jsonObject, "nom_ope"));
-                        operarioEntity.setPater_ope(utils.getValueStringOrNull(jsonObject, "pater_ope"));
-                        operarioEntity.setMater_ope(utils.getValueStringOrNull(jsonObject, "mater_ope"));
-                        operarioEntity.setCelular(utils.getValueStringOrNull(jsonObject, "celular"));
-                        operarioEntity.setFono_fijo(utils.getValueStringOrNull(jsonObject, "fono_fijo"));
-                        operarioEntity.setSexo(utils.getValueStringOrNull(jsonObject, "sexo"));
-                        operarioEntity.setComercio(utils.getValueStringOrNull(jsonObject, "comercio"));
-                        operarioEntity.setComercioj(utils.getValueStringOrNull(jsonObject, "comercioj"));
-                        operarioEntity.setDepartamento(utils.getValueStringOrNull(jsonObject, "departamento"));
-                        operarioEntity.setDistrito(utils.getValueStringOrNull(jsonObject, "distrito"));
-                        operarioEntity.setProvincia(utils.getValueStringOrNull(jsonObject, "provincia"));
-                        operarioEntity.setDireccion(utils.getValueStringOrNull(jsonObject, "direccion"));
-                        listaOperario.add(operarioEntity);
-                    }
-                } else {
-                    listaOperario = null;
-                }
-            } else {
-                listaOperario = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return listaOperario;
-    }
-
-    //ACTUALIZAR-------------------------------------------
     @Override
     public PasswordComercio actualizarClaveAcceso(String clave_comercio, String id_Comercio, String clave_nueva_comercio, String respuesta_pregunta_comercio) {
         PasswordComercio user;
@@ -666,122 +623,6 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         return comercio;
     }
-
-
-    /*@Override
-    public Comercio InsertarComercio(String rucComercio, String razSocialComercio, String direccionComercio, String representanteComercio, String dniRepresentante, int departamento, int provincia, int distrito) {
-        return null;
-    }*/
-
-    @Override
-    public Operario InsertarOperario(String dni_ope,String nom_ope, String pater_ope, String mater_ope, String celular, String fono_fijo, String sexo, String comercio, String departamento, String distrito, String provincia, String direccion, String usu_reg) {//, String cod_interbancario, String num_tarjeta_beneficiario, int emisor_tarjeta, int cod_banco, int cod_tipo_cuenta) {
-        Operario operario;
-        try {
-            operario = new Operario();
-
-            //Tarrillo&imater_ope=Galarza&icelular=978568456&ifono_fijo=7787852&&isexo=Masculino&icomercio=5&idepartamento=LIMA&idistrito=LIMA&iprovincia=SAN%20ISIDRO&idireccion=Av.%20Leoncio%20Prado%203940&iusu_reg=934103162
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertOperario/?idni_ope=" + URLEncoder.encode(dni_ope, "UTF-8")
-                    + "&inom_ope=" + URLEncoder.encode(nom_ope, "UTF-8")
-                    + "&ipater_ope=" + URLEncoder.encode(pater_ope, "UTF-8")
-                    + "&imater_ope=" + URLEncoder.encode(mater_ope, "UTF-8")
-                    + "&icelular=" + URLEncoder.encode(celular, "UTF-8")
-                    + "&ifono_fijo=" + URLEncoder.encode(fono_fijo, "UTF-8")
-                    + "&isexo=" + URLEncoder.encode(sexo, "UTF-8")
-                    + "&icomercio=" + URLEncoder.encode(comercio, "UTF-8")
-                    + "&idepartamento=" + URLEncoder.encode(departamento, "UTF-8")
-                    + "&idistrito=" + URLEncoder.encode(distrito, "UTF-8")
-                    + "&iprovincia=" + URLEncoder.encode(provincia, "UTF-8")
-                    + "&idireccion=" + URLEncoder.encode(direccion, "UTF-8")
-                    + "&iusu_reg=" + URLEncoder.encode(usu_reg, "UTF-8");
-
-            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            Log.e("Json", arrayJason.toString());
-            if (arrayJason != null) {
-                if (arrayJason.length() > 0) {
-                    operario.setDni_ope(dni_ope);
-                    operario.setNom_ope(nom_ope);
-                    operario.setPater_ope(pater_ope);
-                    operario.setMater_ope(mater_ope);
-                    operario.setCelular(celular);
-                    operario.setFono_fijo(fono_fijo);
-                    operario.setSexo(sexo);
-                    operario.setComercio(comercio);
-                    operario.setDepartamento(departamento);
-                    operario.setDistrito(distrito);
-                    operario.setProvincia(provincia);
-                    operario.setDireccion(direccion);
-                    operario.setUsu_reg(usu_reg);
-
-                } else {
-                    operario = null;
-                }
-            } else {
-                operario = null;
-            }
-
-        } catch (Exception e) {
-            Log.getStackTraceString(e);
-            operario = null;
-        }
-
-        return operario;
-    }
-
-    @Override
-    public Operario ActualizarOperario(String id_ope,String dni_ope,String nom_ope, String pater_ope, String mater_ope, String celular, String fono_fijo, String sexo, String comercio, String departamento, String distrito, String provincia, String direccion, String usu_upd) {//, String cod_interbancario, String num_tarjeta_beneficiario, int emisor_tarjeta, int cod_banco, int cod_tipo_cuenta) {
-        Operario operario;
-        try {
-            operario = new Operario();
-
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/UpdateOperario/?uid_ope=" + URLEncoder.encode(id_ope, "UTF-8")
-                    + "&udni_ope=" + URLEncoder.encode(dni_ope, "UTF-8")
-                    + "&unom_ope=" + URLEncoder.encode(nom_ope, "UTF-8")
-                    + "&upater_ope=" + URLEncoder.encode(pater_ope, "UTF-8")
-                    + "&umater_ope=" + URLEncoder.encode(mater_ope, "UTF-8")
-                    + "&ucelular=" + URLEncoder.encode(celular, "UTF-8")
-                    + "&ufono_fijo=" + URLEncoder.encode(fono_fijo, "UTF-8")
-                    + "&usexo=" + URLEncoder.encode(sexo, "UTF-8")
-                    + "&ucomercio=" + URLEncoder.encode(comercio, "UTF-8")
-                    + "&udepartamento=" + URLEncoder.encode(departamento, "UTF-8")
-                    + "&udistrito=" + URLEncoder.encode(distrito, "UTF-8")
-                    + "&uprovincia=" + URLEncoder.encode(provincia, "UTF-8")
-                    + "&udireccion=" + URLEncoder.encode(direccion, "UTF-8")
-                    + "&uusu_upd=" + URLEncoder.encode(usu_upd, "UTF-8");
-
-            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            Log.e("Json", arrayJason.toString());
-            if (arrayJason != null) {
-                if (arrayJason.length() > 0) {
-                    operario.setDni_ope(dni_ope);
-                    operario.setNom_ope(nom_ope);
-                    operario.setPater_ope(pater_ope);
-                    operario.setMater_ope(mater_ope);
-                    operario.setCelular(celular);
-                    operario.setFono_fijo(fono_fijo);
-                    operario.setSexo(sexo);
-                    operario.setComercio(comercio);
-                    operario.setDepartamento(departamento);
-                    operario.setDistrito(distrito);
-                    operario.setProvincia(provincia);
-                    operario.setDireccion(direccion);
-                    operario.setUsu_upd(usu_upd);
-
-                } else {
-                    operario = null;
-                }
-            } else {
-                operario = null;
-            }
-
-        } catch (Exception e) {
-            Log.getStackTraceString(e);
-            operario = null;
-        }
-
-        return operario;
-    }
-
-
 
     @Override
     public Cuentas IngresarCuentasComercio(int tipoCuentaComercio, int banco, int moneda, String numCuentaComercio, String idComercio, String cciComercio) {

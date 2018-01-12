@@ -12,6 +12,7 @@ public class Comercio implements Parcelable{
     private String idComercio, ruc, razSocial, direccion, representanteLegal, dniRepresentante, departamento, distrito, provincia;
     private int departamentoComercio, provinciaComercio, distritoComercio;
     private Context contexto;
+    private String rptaLogin;
 
     public Comercio(String idComercio, String ruc, String razSocial, String direccion, String representanteLegal, String dniRepresentante, int departamentoComercio, int provinciaComercio, int distritoComercio) {
         this.idComercio = idComercio;
@@ -32,6 +33,14 @@ public class Comercio implements Parcelable{
         String[] data = new String[1];
         in.readStringArray(data);
         idComercio = data[0];
+    }
+
+    public String getRptaLogin() {
+        return rptaLogin;
+    }
+
+    public void setRptaLogin(String rptaLogin) {
+        this.rptaLogin = rptaLogin;
     }
 
     public String getDepartamento() {
