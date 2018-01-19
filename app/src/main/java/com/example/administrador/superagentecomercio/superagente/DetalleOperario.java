@@ -97,7 +97,6 @@ public class DetalleOperario extends Activity {
                 intent.putExtra("provincia", provincia);
                 intent.putExtra("direccion", direccion);
                 intent.putExtra("celular", celular);
-
                 startActivity(intent);
                 finish();
             }
@@ -107,6 +106,7 @@ public class DetalleOperario extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetalleOperario.this, ListarOperario.class);
+                intent.putExtra("comercio", idcomercio);
                 startActivity(intent);
                 finish();
             }

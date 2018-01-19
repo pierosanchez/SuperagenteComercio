@@ -44,7 +44,9 @@
         <activity android:name=".superagente.LoginIngresoUsuario" />
         <activity android:name=".superagente.VoucherConsumos" />
         <activity android:name=".superagente.AgregarOperario2" />
-        <activity android:name=".superagente.EditarOperario2"></activity>
+        <activity android:name=".superagente.EditarOperario2" />
+        <activity android:name=".superagente.LoginNumeroComercio" />
+        <activity android:name=".superagente.LoginPasswordComercio"></activity>
     </application>
 
 </manifest>

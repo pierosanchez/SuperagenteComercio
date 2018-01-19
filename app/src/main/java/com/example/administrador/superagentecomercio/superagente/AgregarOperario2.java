@@ -156,7 +156,10 @@ public class AgregarOperario2 extends Activity {
                 AgregarOperario2.insertarOperario insertar = new AgregarOperario2.insertarOperario();
                 insertar.execute();
 
-
+                Intent intent = new Intent(AgregarOperario2.this, ListarOperario.class);
+                intent.putExtra("comercio", idcomercio);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -179,7 +182,7 @@ public class AgregarOperario2 extends Activity {
 
             } catch (Exception e) {
                 user = null;
-                //fldag_clic_ingreso = 0;;
+                //fldag_clic_ingreso = 0;
             }
             return user;
         }

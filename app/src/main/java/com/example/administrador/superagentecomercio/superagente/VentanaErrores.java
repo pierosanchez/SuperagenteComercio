@@ -61,6 +61,31 @@ public class VentanaErrores extends Activity {
                     finish();
                 }
             });
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroComercio")){
+            /*Bundle bundle = getIntent().getExtras();
+            bundle.getParcelable("comercio");*/
+
+            btn_opcion1.setText("Reintentar");
+            btn_opcion2.setText("Registrarse");
+
+            btn_opcion1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(VentanaErrores.this, LoginNumeroComercio.class);
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
+
+            btn_opcion2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
+                    //sanipesIntent.putExtra("movil", numCliente);
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
         }
     }
 }

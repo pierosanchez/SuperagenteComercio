@@ -128,6 +128,7 @@ public class AgregarOperario extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AgregarOperario.this, ListarOperario.class);
+                intent.putExtra("comercio", idcomercio);
                 startActivity(intent);
                 finish();
             }

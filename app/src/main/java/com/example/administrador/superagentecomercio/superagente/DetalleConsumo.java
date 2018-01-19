@@ -17,6 +17,7 @@ import com.example.administrador.superagentecomercio.adapter.DetalleComercioAdap
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoImplement;
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoInterface;
 import com.example.administrador.superagentecomercio.entity.Comercio;
+import com.example.administrador.superagentecomercio.entity.Cuentas;
 import com.example.administrador.superagentecomercio.entity.VoucherPagoConsumo;
 
 import org.w3c.dom.Text;
@@ -129,7 +130,10 @@ public class DetalleConsumo extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(DetalleConsumo.this, "Operacion eliminada satisfactoriamente", Toast.LENGTH_LONG).show();
+                //Toast.makeText(DetalleConsumo.this, "Operacion eliminada satisfactoriamente", Toast.LENGTH_LONG).show();
+
+                DetalleConsumo.anularVoucherComercio anularVoucher = new DetalleConsumo.anularVoucherComercio();
+                anularVoucher.execute();
 
                 Intent intent = new Intent(DetalleConsumo.this, MenuCliente.class);
                 intent.putExtra("comercio", comercio);
@@ -147,5 +151,32 @@ public class DetalleConsumo extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private class anularVoucherComercio extends AsyncTask<String, Void, VoucherPagoConsumo> {
+
+        @Override
+        protected VoucherPagoConsumo doInBackground(String... params) {
+            VoucherPagoConsumo password;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                password = dao.AnulacionVoucherConsumo(numUnico);
+            } catch (Exception e) {
+                password = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return password;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoConsumo voucherPagoConsumo) {
+            if (voucherPagoConsumo != null) {
+                if (voucherPagoConsumo.getRptaAnulacionVoucher().equals("00")) {
+                    Toast.makeText(DetalleConsumo.this, "Se anuló la operacion exitosamente", Toast.LENGTH_LONG).show();
+                } else if (voucherPagoConsumo.getRptaAnulacionVoucher().equals("01")) {
+                    Toast.makeText(DetalleConsumo.this, "Hubo un error al anular la operacion", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }

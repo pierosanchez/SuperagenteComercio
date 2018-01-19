@@ -19,7 +19,7 @@ public class Splash extends Activity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent loginIntent = new Intent().setClass(Splash.this, Login.class);
+                Intent loginIntent = new Intent().setClass(Splash.this, LoginNumeroComercio.class);
                 startActivity(loginIntent);
                 finish();
             }
