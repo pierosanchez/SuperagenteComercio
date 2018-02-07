@@ -417,6 +417,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         usuarioEntity.setNombreComercio(utils.getValueStringOrNull(jsonObject, "nombre_comercio"));
                         usuarioEntity.setNroTarjeta(utils.getValueStringOrNull(jsonObject, "nro_tarjeta"));
                         usuarioEntity.setBancoTarjeta(utils.getValueStringOrNull(jsonObject, "banco_tarjeta"));
+                        usuarioEntity.setEstadoVoucher(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "estadoVoucher")));
                         listaUsuario.add(usuarioEntity);
                     }
                 } else {

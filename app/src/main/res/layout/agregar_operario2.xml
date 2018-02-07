@@ -23,7 +23,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="AGREGAR OPERADOR"
+                    android:text="AGREGAR OPERARIO"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:background="@color/colorFondo"
@@ -34,6 +34,7 @@
 
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -41,8 +42,151 @@
                 android:layout_alignParentStart="true">
 
 
+                <LinearLayout android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/border_editext"
+                    android:orientation="horizontal">
 
-                <LinearLayout
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="15dp"
+                        android:src="@drawable/ic_locali"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Dpto."
+                        android:textSize="18dp"
+                        android:textColor="@color/color_blanco"
+                        />
+
+                    <Spinner
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/sp_departamento"
+                        android:layout_width="175dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="39dp"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/spinner_selector"
+                        android:spinnerMode="dropdown"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/border_editext"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="15dp"
+                        android:src="@drawable/ic_locali"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Provincia"
+                        android:textSize="18dp"
+                        android:textColor="@color/color_blanco"
+                        />
+
+                    <Spinner
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/sp_provincia"
+                        android:layout_width="175dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/spinner_selector"
+                        android:spinnerMode="dropdown"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/border_editext"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="15dp"
+                        android:src="@drawable/ic_locali"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Distrito"
+                        android:textSize="18dp"
+                        android:textColor="@color/color_blanco"
+                        />
+
+                    <Spinner
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/sp_distrito"
+                        android:layout_width="175dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="27dp"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/spinner_selector"
+                        android:spinnerMode="dropdown"
+                        />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_direccion"
+                    android:drawableLeft="@drawable/ic_home"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Dirección"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <!--<LinearLayout
                     android:layout_marginTop="50px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,6 +280,7 @@
 
 
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,7 +317,19 @@
                     android:layout_marginLeft="20dp"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="Guardar"/>
+                    android:text="Guardar"/>-->
+
+                <Button
+                    android:layout_marginTop="200dp"
+                    android:id="@+id/btn_guardarOperario"
+                    android:textColor="#fff"
+                    android:background="@drawable/buttonstyleithgradient"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:text="Guardar"
+                    android:padding="0dp"
+                    android:layout_marginBottom="20dp"/>
 
 
 
@@ -192,14 +349,14 @@
         app:fab_addButtonPlusIconColor="#4dbdd9"
         app:fab_labelStyle="@style/menu_labels_style">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
+        <!--<com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/action_guardar"
             app:fab_icon="@drawable/ic_save"
             app:fab_addButtonColorNormal="#4dbdd9"
             app:fab_addButtonColorPressed="#ffffff"
-            app:fab_size="mini"/>
+            app:fab_size="mini"/>-->
         <!--app:fab_title="Guardar"-->
 
 

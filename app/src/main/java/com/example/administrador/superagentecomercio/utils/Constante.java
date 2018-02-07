@@ -13,7 +13,8 @@ public class Constante {
     public static final int OPCION_CLAVE_ACCESO = 0;
     public static final int OPCION_INFORMACION_TARJETAS = 1;
     public static final int OPCION_LOGIN = 2;
-    public static final String BDSUPERAGENTE = "BDSUPERAGENTE";
+    public static final String BDSUPERAGENTECOMERCIO = "BDSUPERAGENTECOMERCIO";
+    public static String TB_NAME = "COMERCIO";
     public static final String EMAILPATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public static final String ACTIVITYROOT = "com.example.administrador.superagentecomercio.superagente.";
     public static final String PASSWORDPATTERN = "[a-z^A-Z^0-9]";

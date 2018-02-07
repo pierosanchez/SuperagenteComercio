@@ -1,6 +1,8 @@
 package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.administrador.superagentecomercio.R;
 import com.example.administrador.superagentecomercio.adapter.DepartamentosUbigeoAdapter;
@@ -42,7 +45,7 @@ public class AgregarOperario2 extends Activity {
 
     private Comercio idcomercio;
 
-    String dni,nombre,paterno,materno,celular,fono,sexo;
+    String dni,nombre,paterno,materno,celular,fono,sexo,usuario;
 
     String departamentoUbigeo, departamentoUbigeoDesc, distritoUbigeo,
             distritoUbigeoDesc, provinciaUbigeo, provinciaUbigeoDesc;
@@ -54,6 +57,7 @@ public class AgregarOperario2 extends Activity {
         setContentView(R.layout.agregar_operario2);
 
         btn_regresar = (FloatingActionButton) findViewById(R.id.action_return);
+        btn_menu = (FloatingActionButton)findViewById(R.id.action_menu);
         btn_guardarOperario = (Button) findViewById(R.id.btn_guardarOperario);
 
         et_direccion = (EditText) findViewById(R.id.et_direccion);
@@ -79,6 +83,7 @@ public class AgregarOperario2 extends Activity {
         celular = bundle.getString("celular");
         fono = bundle.getString("fono");
         sexo = bundle.getString("sexo");
+        usuario = bundle.getString("user");
 
 
         sp_departamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -138,11 +143,23 @@ public class AgregarOperario2 extends Activity {
             }
         });
 
+
+
         btn_regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AgregarOperario2.this, ListarOperario.class);
-                intent.putExtra("comercio", idcomercio);
+                Intent intent = new Intent(AgregarOperario2.this, AgregarOperario.class);
+                intent.putExtra("idcomercio", idcomercio);
+                intent.putExtra("dni", dni);
+                intent.putExtra("nombre", nombre);
+                intent.putExtra("paterno", paterno);
+                intent.putExtra("materno", materno);
+                intent.putExtra("celular", celular);
+                intent.putExtra("fono", fono);
+                intent.putExtra("sexo", sexo);
+                intent.putExtra("user", usuario);
+
+
                 startActivity(intent);
                 finish();
             }
@@ -152,16 +169,30 @@ public class AgregarOperario2 extends Activity {
         btn_guardarOperario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String direccion = et_direccion.getText().toString();
 
-                AgregarOperario2.insertarOperario insertar = new AgregarOperario2.insertarOperario();
-                insertar.execute();
+                if(direccion.length() !=0){
+                    AgregarOperario2.insertarOperario insertar = new AgregarOperario2.insertarOperario();
+                    insertar.execute();
 
-                Intent intent = new Intent(AgregarOperario2.this, ListarOperario.class);
-                intent.putExtra("comercio", idcomercio);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(AgregarOperario2.this, ListarOperario.class);
+                    intent.putExtra("comercio", idcomercio);
+                    intent.putExtra("user", usuario);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(AgregarOperario2.this, "Debe colocar una dirección", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelar();
+            }
+        });
+
 
     }
 
@@ -178,11 +209,11 @@ public class AgregarOperario2 extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.InsertarOperario( dni, nombre,  paterno,  materno, celular, fono,  sexo, idcomercio.getIdComercio(), departamentoUbigeoDesc, distritoUbigeoDesc, provinciaUbigeoDesc, direccion, "934103162");
+                user = dao.InsertarOperario( dni, nombre,  paterno,  materno, celular, fono,  sexo, idcomercio.getIdComercio(), departamentoUbigeoDesc, distritoUbigeoDesc, provinciaUbigeoDesc, direccion, usuario);
 
             } catch (Exception e) {
                 user = null;
-                //fldag_clic_ingreso = 0;
+                //fldag_clic_ingreso = 0;;
             }
             return user;
         }
@@ -287,6 +318,32 @@ public class AgregarOperario2 extends Activity {
             provinciaUbigeoAdapter.setNewListProvinciaUbigeo(ubigeoArrayListProvincia);
             provinciaUbigeoAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Está seguro que desea regresar al menú?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(AgregarOperario2.this, MenuCliente.class);
+                intent.putExtra("comercio", idcomercio);
+                intent.putExtra("user", usuario);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 
 }

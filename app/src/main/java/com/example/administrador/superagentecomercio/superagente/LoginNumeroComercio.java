@@ -2,6 +2,7 @@ package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.administrador.superagentecomercio.R;
+import com.example.administrador.superagentecomercio.dao.SuperAgenteComercioBD;
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoImplement;
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoInterface;
 import com.example.administrador.superagentecomercio.entity.Comercio;
+import com.example.administrador.superagentecomercio.utils.Constante;
 
 public class LoginNumeroComercio extends Activity {
 
@@ -21,6 +24,7 @@ public class LoginNumeroComercio extends Activity {
     private Button btn_aceptar, btn_salir;
     private String _numero;
     private ProgressBar circleProgressBar;
+    private String callingActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,12 @@ public class LoginNumeroComercio extends Activity {
         btn_salir = (Button) findViewById(R.id.btn_salir);
 
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
+
+        callingActivity = this.getCallingActivity().getClassName();
+
+        if (callingActivity.equals(Constante.ACTIVITYROOT + "Splash")) {
+            setNumeroCelUsuarioFromSQLite();
+        }
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +97,7 @@ public class LoginNumeroComercio extends Activity {
                 if (usuarioEntity.getRptaLogin().equals("01")) {
                     circleProgressBar.setVisibility(View.GONE);
                     Intent sanipesIntent = new Intent(LoginNumeroComercio.this, VentanaErrores.class);
+                    sanipesIntent.putExtra("numero", _celular);
                     startActivityForResult(sanipesIntent, 0);
                     finish();
                 } else if (usuarioEntity.getRptaLogin().equals("00")) {
@@ -98,5 +109,28 @@ public class LoginNumeroComercio extends Activity {
                 }
             }
         }
+    }
+
+    private void setNumeroCelUsuarioFromSQLite(){
+        String _celular = usuario.getText().toString();
+
+        SuperAgenteComercioBD superAgenteBD = new SuperAgenteComercioBD(LoginNumeroComercio.this);
+        Cursor cursor = superAgenteBD.getReadableDatabase().query(Constante.TB_NAME, new String[] {"movil"}, null, null, null, null, null, "1");
+
+        if(cursor.moveToFirst() && cursor.getCount() >= 1) {
+            do {
+                int iMovil = cursor.getColumnIndex("movil");
+                String numero = cursor.getString(iMovil);
+                usuario.setText(numero);
+                usuario.setEnabled(false);
+            } while (cursor.moveToNext());
+        } else {
+            circleProgressBar.setVisibility(View.GONE);
+            Intent sanipesIntent = new Intent(LoginNumeroComercio.this, VentanaErrores.class);
+            sanipesIntent.putExtra("numero", _celular);
+            startActivityForResult(sanipesIntent, 0);
+            finish();
+        }
+        cursor.close();
     }
 }

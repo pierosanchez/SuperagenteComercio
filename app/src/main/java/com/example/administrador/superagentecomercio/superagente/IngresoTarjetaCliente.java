@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.administrador.superagentecomercio.R;
 
-public class LoginIngresoUsuario extends Activity {
+public class IngresoTarjetaCliente extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_ingreso_usuario);
+        setContentView(R.layout.ingreso_tarjeta_cliente);
     }
 }

@@ -22,7 +22,7 @@ public class VoucherConsumos extends Activity {
     String numUnico;
     TextView tv_fecha_pago, txt_hora_pago, txt_numero_unico_voucher_consumos,
             txt_importe_voucher_consumo, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo,
-            tv_banco_voucher_consumo, tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio;
+            tv_banco_voucher_consumo, tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio,  tv_estado_voucher;
     Button btn_regresar;
     ArrayList<VoucherPagoConsumo> voucherPagoConsumoArrayList;
     DetalleComercioAdapter detalleComercioAdapter;
@@ -43,6 +43,7 @@ public class VoucherConsumos extends Activity {
         tv_nombre_comercio = (TextView) findViewById(R.id.tv_nombre_comercio);
         tv_direccion_comercio = (TextView) findViewById(R.id.tv_direccion_comercio);
         tv_distrito_comercio = (TextView) findViewById(R.id.tv_distrito_comercio);
+        tv_estado_voucher = (TextView) findViewById(R.id.tv_estado_voucher);
 
         btn_regresar = (Button) findViewById(R.id.btn_regresar);
 
@@ -105,6 +106,11 @@ public class VoucherConsumos extends Activity {
             tv_nombre_comercio.setText(voucherPagoConsumoArrayList.get(0).getNombreComercio());
             tv_direccion_comercio.setText(voucherPagoConsumoArrayList.get(0).getDireccionComercio());
             tv_distrito_comercio.setText(voucherPagoConsumoArrayList.get(0).getDistritoComercio());
+            if (voucherPagoConsumoArrayList.get(0).getEstadoVoucher() == 0) {
+                tv_estado_voucher.setText("Vigente");
+            } else if (voucherPagoConsumoArrayList.get(0).getEstadoVoucher() == 1) {
+                tv_estado_voucher.setText("Anulado");
+            }
         }
     }
 }

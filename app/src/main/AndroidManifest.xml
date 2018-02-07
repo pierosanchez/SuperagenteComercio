@@ -41,12 +41,12 @@
         <activity android:name=".superagente.EditarOperario" />
         <activity android:name=".superagente.DetalleOperario" />
         <activity android:name=".superagente.ReporteMovimientos" />
-        <activity android:name=".superagente.LoginIngresoUsuario" />
         <activity android:name=".superagente.VoucherConsumos" />
         <activity android:name=".superagente.AgregarOperario2" />
         <activity android:name=".superagente.EditarOperario2" />
         <activity android:name=".superagente.LoginNumeroComercio" />
-        <activity android:name=".superagente.LoginPasswordComercio"></activity>
+        <activity android:name=".superagente.LoginPasswordComercio" />
+        <activity android:name=".superagente.IngresoTarjetaCliente"></activity>
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class Splash extends Activity {
             @Override
             public void run() {
                 Intent loginIntent = new Intent().setClass(Splash.this, LoginNumeroComercio.class);
-                startActivity(loginIntent);
+                startActivityForResult(loginIntent, 0);
                 finish();
             }
         };

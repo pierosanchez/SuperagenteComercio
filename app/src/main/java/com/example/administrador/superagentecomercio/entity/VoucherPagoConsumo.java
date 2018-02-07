@@ -18,6 +18,7 @@ public class VoucherPagoConsumo {
     private String idCliente;
     private String nomCliente;
     private String rptaAnulacionVoucher;
+    private int estadoVoucher;
 
     public VoucherPagoConsumo(){
 
@@ -36,6 +37,14 @@ public class VoucherPagoConsumo {
         this.distritoComercio = distritoComercio;
         this.idCliente = idCliente;
         this.nomCliente = nomCliente;
+    }
+
+    public int getEstadoVoucher() {
+        return estadoVoucher;
+    }
+
+    public void setEstadoVoucher(int estadoVoucher) {
+        this.estadoVoucher = estadoVoucher;
     }
 
     public String getRptaAnulacionVoucher() {

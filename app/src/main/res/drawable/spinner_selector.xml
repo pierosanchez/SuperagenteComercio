@@ -8,5 +8,7 @@
     <item android:drawable="@drawable/btn_dropdown_selected" android:state_focused="true"/>
     <item android:drawable="@drawable/btn_dropdown_normal"/>
 
+
 </selector>
+
 

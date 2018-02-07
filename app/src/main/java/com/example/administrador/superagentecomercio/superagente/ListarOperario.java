@@ -1,6 +1,8 @@
 package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 
 public class ListarOperario extends Activity {
 
-    FloatingActionButton btn_menu, btn_agregar;
+    FloatingActionButton btn_menu,btn_agregar;
     private Operario operario;
     private Comercio idcomercio;
     ListView lv_listado_operario;
@@ -31,9 +33,9 @@ public class ListarOperario extends Activity {
     OperarioAdapter operarioAdapter;
     ArrayList<Operario> arrayoperario;
 
-    private String id_ope, dni_ope, nom_ope, pater_ope, mater_ope, celular, fono_fijo, comercio,
-            comercioj, direccion;
-    private String sexo, departamento, distrito, provincia;
+    private String id_ope,dni_ope,nom_ope,pater_ope,mater_ope,celular,fono_fijo,comercio,
+            comercioj,direccion,user;
+    private String sexo,departamento,distrito,provincia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +45,17 @@ public class ListarOperario extends Activity {
         lv_listado_operario = (ListView) findViewById(R.id.lv_listado_operario);
 
         btn_menu = (FloatingActionButton) findViewById(R.id.action_menu);
+        btn_menu = (FloatingActionButton)findViewById(R.id.action_menu);
         btn_agregar = (FloatingActionButton) findViewById(R.id.action_agregar);
 
         Bundle bundle = getIntent().getExtras();
         idcomercio = bundle.getParcelable("comercio");
+        user = bundle.getString("user");
 
         arrayoperario = null;
+
         operarioAdapter = new OperarioAdapter(arrayoperario, getApplication());
+
         lv_listado_operario.setAdapter(operarioAdapter);
 
         ejecutarLista();
@@ -73,46 +79,71 @@ public class ListarOperario extends Activity {
                 provincia = operarioAdapter.getItem(position).getProvincia();
 
 
+                    Intent intent = new Intent(ListarOperario.this, DetalleOperario.class);
+                    intent.putExtra("id_ope", id_ope);
+                    intent.putExtra("dni_ope", dni_ope);
+                    intent.putExtra("nom_ope", nom_ope);
+                    intent.putExtra("pater_ope", pater_ope);
+                    intent.putExtra("mater_ope", mater_ope);
+                    intent.putExtra("fono_fijo", fono_fijo);
+                    intent.putExtra("celular", celular);
+                    intent.putExtra("comercio", comercio);
+                    intent.putExtra("comercioj", comercioj);
+                    intent.putExtra("sexo", sexo);
+                    intent.putExtra("departamento", departamento);
+                    intent.putExtra("distrito", distrito);
+                    intent.putExtra("provincia", provincia);
+                    intent.putExtra("direccion", direccion);
+                    intent.putExtra("idcomercio", idcomercio);
+                    intent.putExtra("user", user);
+                    startActivity(intent);
+                    finish();
+
+
+            }
+        });
+
+        /*btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(ListarOperario.this, DetalleOperario.class);
-                intent.putExtra("id_ope", id_ope);
-                intent.putExtra("dni_ope", dni_ope);
-                intent.putExtra("nom_ope", nom_ope);
-                intent.putExtra("pater_ope", pater_ope);
-                intent.putExtra("mater_ope", mater_ope);
-                intent.putExtra("fono_fijo", fono_fijo);
-                intent.putExtra("celular", celular);
-                intent.putExtra("comercio", comercio);
-                intent.putExtra("comercioj", comercioj);
-                intent.putExtra("sexo", sexo);
-                intent.putExtra("departamento", departamento);
-                intent.putExtra("distrito", distrito);
-                intent.putExtra("provincia", provincia);
-                intent.putExtra("direccion", direccion);
-                intent.putExtra("idcomercio", idcomercio);
                 startActivity(intent);
                 finish();
+            }
+        });*/
 
+        btn_agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dni = "";
+                String nombre = "";
+                String paterno = "";
+                String materno = "";
+                String celular = "";
+                String fono = "";
+                String sexo = "";
 
+                Intent intent = new Intent(ListarOperario.this, AgregarOperario.class);
+                intent.putExtra("idcomercio", idcomercio);
+                intent.putExtra("dni", dni);
+                intent.putExtra("nombre", nombre);
+                intent.putExtra("paterno", paterno);
+                intent.putExtra("materno", materno);
+                intent.putExtra("celular", celular);
+                intent.putExtra("fono", fono);
+                intent.putExtra("sexo", sexo);
+                intent.putExtra("user", user);
+                //intent.putExtra("idcomercio", idcomercio);
+                //intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
             }
         });
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent sanipesIntent = new Intent(ListarOperario.this, MenuCliente.class);
-                sanipesIntent.putExtra("comercio", idcomercio);
-                startActivity(sanipesIntent);
-                finish();
-            }
-        });
-
-        btn_agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListarOperario.this, AgregarOperario.class);
-                intent.putExtra("idcomercio", idcomercio);
-                startActivity(intent);
-                finish();
+            public void onClick(View view) {
+                cancelar();
             }
         });
 
@@ -120,19 +151,19 @@ public class ListarOperario extends Activity {
     }
 
 
-    private void ejecutarLista() {
+    private void ejecutarLista(){
         //idcomercio = operario.getComercio();
 
         try {
             ListarOperario.ListadoOperario listadoOperario = new ListarOperario.ListadoOperario();
             listadoOperario.execute();
-        } catch (Exception e) {
+        } catch (Exception e){
             //listadoBeneficiario = null;
         }
 
     }
 
-    private class ListadoOperario extends AsyncTask<String, Void, Void> {
+    private class ListadoOperario extends AsyncTask<String,Void,Void> {
         @Override
         protected Void doInBackground(String... params) {
 
@@ -149,10 +180,38 @@ public class ListarOperario extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             operarioAdapter.setNewListOperario(arrayoperario);
-            operarioAdapter.notifyDataSetChanged();
-            /*circleProgressBar.setVisibility(View.GONE);*/
+            /*operarioAdapter.notifyDataSetChanged();
+            circleProgressBar.setVisibility(View.GONE);*/
         }
     }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Está seguro que desea regresar al menú?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(ListarOperario.this, MenuCliente.class);
+                intent.putExtra("comercio", idcomercio);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+
+
 
 
 }

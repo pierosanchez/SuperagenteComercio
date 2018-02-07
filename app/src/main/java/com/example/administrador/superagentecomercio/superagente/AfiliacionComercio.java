@@ -2,6 +2,7 @@ package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.widget.Toast;
 import com.example.administrador.superagentecomercio.R;
 import com.example.administrador.superagentecomercio.adapter.DistritoAdapter;
 import com.example.administrador.superagentecomercio.adapter.PreguntaAdapter;
+import com.example.administrador.superagentecomercio.dao.SuperAgenteComercioBD;
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoImplement;
 import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoInterface;
 import com.example.administrador.superagentecomercio.entity.Comercio;
 import com.example.administrador.superagentecomercio.entity.PasswordComercio;
 import com.example.administrador.superagentecomercio.entity.Pregunta;
+import com.example.administrador.superagentecomercio.utils.Constante;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,7 @@ public class AfiliacionComercio extends Activity {
     Spinner sp_pregunta;
     EditText txt_clave_acceso, txt_confirma_clave_acceso, txt_respuesta, txt_confirme, txt_correo_electronico, txt_celular;
     private Comercio comercio;
-    String pregunta;
+    private String pregunta, numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,14 @@ public class AfiliacionComercio extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         comercio = bundle.getParcelable("comercio");
+        numero = bundle.getString("numero");
+
+        if (numero.equals("")) {
+            txt_celular.setText(numero);
+            txt_celular.setEnabled(false);
+        } else {
+            txt_celular.setEnabled(true);
+        }
 
         preguntaArrayList = null;
         preguntaAdapter = new PreguntaAdapter(preguntaArrayList, getApplication());
@@ -127,6 +138,10 @@ public class AfiliacionComercio extends Activity {
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
                 password = dao.IngresarPasswordComercio(comercio.getIdComercio(), clave, pregunta, respuesta, correo, celular);
+                SuperAgenteComercioBD superAgenteBD = new SuperAgenteComercioBD(AfiliacionComercio.this);
+                SQLiteDatabase db = superAgenteBD.getWritableDatabase();
+                db.execSQL("INSERT INTO " + Constante.TB_NAME + " (movil) VALUES('" + celular + "')");
+                db.close();
             } catch (Exception e) {
                 password = null;
                 //fldag_clic_ingreso = 0;;

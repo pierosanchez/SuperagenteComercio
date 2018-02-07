@@ -14,11 +14,11 @@ import com.example.administrador.superagentecomercio.utils.Constante;
 
 public class VentanaErrores extends Activity {
 
-    Button btn_opcion1, btn_opcion2, btn_opcion3;
-    Comercio comercio;
-    TextView tv_titulo, tv_mensaje;
-    LinearLayout ll_boton_opcion3;
-    String numCliente;
+    private Button btn_opcion1, btn_opcion2, btn_opcion3;
+    private Comercio comercio;
+    private TextView tv_titulo, tv_mensaje;
+    private LinearLayout ll_boton_opcion3;
+    private String numCliente, numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,34 +36,9 @@ public class VentanaErrores extends Activity {
 
         String callingActivity = this.getCallingActivity().getClassName();
 
-        if (callingActivity.equals(Constante.ACTIVITYROOT + "Login")){
+        if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroComercio")){
             Bundle bundle = getIntent().getExtras();
-            bundle.getParcelable("comercio");
-
-            btn_opcion1.setText("Reintentar");
-            btn_opcion2.setText("Registrarse");
-
-            btn_opcion1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent sanipesIntent = new Intent(VentanaErrores.this, Login.class);
-                    startActivity(sanipesIntent);
-                    finish();
-                }
-            });
-
-            btn_opcion2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
-                    //sanipesIntent.putExtra("movil", numCliente);
-                    startActivity(sanipesIntent);
-                    finish();
-                }
-            });
-        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroComercio")){
-            /*Bundle bundle = getIntent().getExtras();
-            bundle.getParcelable("comercio");*/
+            numero = bundle.getString("numero");
 
             btn_opcion1.setText("Reintentar");
             btn_opcion2.setText("Registrarse");
@@ -72,7 +47,7 @@ public class VentanaErrores extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent sanipesIntent = new Intent(VentanaErrores.this, LoginNumeroComercio.class);
-                    startActivity(sanipesIntent);
+                    startActivityForResult(sanipesIntent, 0);
                     finish();
                 }
             });
@@ -81,7 +56,7 @@ public class VentanaErrores extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
-                    //sanipesIntent.putExtra("movil", numCliente);
+                    sanipesIntent.putExtra("numero", numero);
                     startActivity(sanipesIntent);
                     finish();
                 }

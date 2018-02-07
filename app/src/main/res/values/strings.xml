@@ -142,6 +142,8 @@
     <!-- Pantalla de Reporte de movimientos -->
 
     <string name="titulo_reporte_movimientos">REPORTE DE MOVIMIENTOS</string>
+    <string name="tv_ingrese_clave_operario">INGRESE LA CLAVE DEL OPERARIO</string>
+    <string name="btn_pago_consumo">PAGO DE CONSUMOS</string>
 
 
 </resources>

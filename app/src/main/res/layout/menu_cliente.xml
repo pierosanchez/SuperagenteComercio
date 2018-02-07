@@ -37,15 +37,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:gravity="center">
 
                 <TextView
-                    android:textSize="16dp"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv_seleccione_operacion"/>
+                    android:text="@string/tv_seleccione_operacion"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -65,10 +65,10 @@
                     android:text="@string/btn_anulacion_menu" />
 
                 <Button
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_consulta_voucher" />
+                    android:text="@string/btn_consulta_voucher"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_reporte_movimientos"
@@ -77,27 +77,34 @@
                     android:text="@string/btn_reporte_movimientos" />
 
                 <Button
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_agentes_contactos" />
+                    android:text="@string/btn_agentes_contactos"
+                    android:visibility="gone" />
 
                 <Button
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_facturacion_comercio" />
+                    android:text="@string/btn_facturacion_comercio"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_cambio_clave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_cambio_clave" />
+
                 <Button
                     android:id="@+id/btn_mantenimiento_menu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_mantenimiento_menu" />
+
+                <Button
+                    android:id="@+id/btn_pago_consumo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_pago_consumo" />
 
             </LinearLayout>
 
@@ -110,8 +117,8 @@
                     android:id="@+id/btn_salir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_salir"
-                    android:background="@color/color_blanco"/>
+                    android:background="@color/color_blanco"
+                    android:text="@string/btn_salir" />
 
             </LinearLayout>
 

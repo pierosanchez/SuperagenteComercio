@@ -19,7 +19,7 @@
             android:layout_height="40dp"
             android:background="@color/colorFondo"
             android:gravity="center"
-            android:text="@string/titulo_terminos_condiciones"
+            android:text="@string/titulo_ingreso_informacion_comercio"
             android:textColor="@color/color_blanco"
             android:textSize="16dp" />
 

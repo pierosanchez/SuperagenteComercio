@@ -22,6 +22,7 @@
                 android:orientation="vertical"
                 android:layout_height="230dp">
                 <ImageView
+                    android:id="@+id/img_operario"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="150dp"
@@ -102,14 +103,19 @@
                             android:layout_height="wrap_content"
                             android:text="Sexo"
                             android:textSize="20sp"/>
-                        <TextView
+                        <!--<TextView
                             android:id="@+id/tv_sexo_deta"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="M"
                             android:textStyle="bold"
                             android:textSize="20sp"
-                            android:textColor="@color/colorfondoactivity"/>
+                            android:textColor="@color/colorfondoactivity"/>-->
+                        <ImageView
+                            android:id="@+id/icono_sexo"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/icon_masculino"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -256,62 +262,60 @@
     </LinearLayout>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/multiple_actions"
-        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="18dp"
         app:fab_addButtonColorNormal="#f9f6f6"
         app:fab_addButtonColorPressed="#dadfe1"
         app:fab_addButtonPlusIconColor="#4dbdd9"
-        app:fab_labelStyle="@style/menu_labels_style"
-        >
+        app:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/action_editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_addButtonColorNormal="#4dbdd9"
+            app:fab_addButtonColorPressed="#ffffff"
             app:fab_icon="@drawable/ic_create"
-            app:fab_addButtonColorNormal="#4dbdd9"
-            app:fab_addButtonColorPressed="#ffffff"
-            app:fab_size="mini"/>
-            <!--app:fab_title="Editar"-->
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/action_eliminar"
-            app:fab_icon="@drawable/ic_delete"
-            app:fab_addButtonColorNormal="#4dbdd9"
-            app:fab_addButtonColorPressed="#ffffff"
-            app:fab_size="mini"/>
-            <!--app:fab_title="Eliminar"-->
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/action_return"
-            app:fab_icon="@drawable/ic_replay"
-            app:fab_addButtonColorNormal="#ffffff"
-            app:fab_addButtonColorPressed="#4dbdd9"
             app:fab_size="mini" />
-            <!--app:fab_title="Regresar"-->
+        <!--app:fab_title="Editar"-->
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_eliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/action_menu"
-            app:fab_icon="@drawable/ic_home"
+            app:fab_addButtonColorNormal="#4dbdd9"
+            app:fab_addButtonColorPressed="#ffffff"
+            app:fab_icon="@drawable/ic_delete"
+            app:fab_size="mini" />
+        <!--app:fab_title="Eliminar"-->
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:fab_addButtonColorNormal="#ffffff"
             app:fab_addButtonColorPressed="#4dbdd9"
-            app:fab_size="mini"/>
-            <!--app:fab_title="Regresar"-->
+            app:fab_icon="@drawable/ic_replay"
+            app:fab_size="mini" />
+        <!--app:fab_title="Regresar"-->
 
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_addButtonColorNormal="#ffffff"
+            app:fab_addButtonColorPressed="#4dbdd9"
+            app:fab_icon="@drawable/ic_home"
+            app:fab_size="mini" />
+        <!--app:fab_title="Regresar"-->
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

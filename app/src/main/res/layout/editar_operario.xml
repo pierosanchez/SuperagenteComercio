@@ -18,6 +18,202 @@
             android:layout_alignParentStart="true">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linearLayout">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="EDITAR OPERARIO"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:background="@color/colorFondo"
+                    android:gravity="center"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_dni"
+                    android:drawableLeft="@drawable/ic_dni"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Dni"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <EditText
+                    android:id="@+id/et_nombre"
+                    android:drawableLeft="@drawable/ic_persona"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Nombres"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <EditText
+                    android:id="@+id/et_paterno"
+                    android:drawableLeft="@drawable/ic_persona"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Apellido Paterno"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <EditText
+                    android:id="@+id/et_materno"
+                    android:drawableLeft="@drawable/ic_persona"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Apellido Materno"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <EditText
+                    android:id="@+id/et_celular"
+                    android:drawableLeft="@drawable/ic_celu"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Celular"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+                <EditText
+                    android:id="@+id/et_fono"
+                    android:drawableLeft="@drawable/ic_fono"
+                    android:drawablePadding="15dp"
+                    android:textColorHint="#fff"
+                    android:paddingLeft="10dp"
+                    android:hint="Teléfono Fijo"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/border_editext"/>
+
+
+                <!-- <Spinner
+                     android:id="@+id/sp_sexo"
+                     android:drawableLeft="@drawable/ic_dni"
+                     android:drawablePadding="15dp"
+                     android:textColorHint="#fff"
+                     android:paddingLeft="10dp"
+                     android:hint="Seleccionar Sexo"
+                     android:padding="15dp"
+                     android:textColor="#fff"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginLeft="20dp"
+                     android:layout_marginRight="20dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="50dp"
+                     android:layout_gravity="center"
+                     android:layout_centerVertical="true"
+
+                     android:spinnerMode="dropdown"/>-->
+
+
+                <LinearLayout android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/border_editext"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="15dp"
+                        android:src="@drawable/ic_sexo"/>
+                    <TextView
+                        android:id="@+id/pruebas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginRight="6dp"
+                        android:text="Sexo"
+                        android:textSize="18dp"
+                        android:textColor="@color/color_blanco"
+                        />
+
+                    <Spinner
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/sp_sexo"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/spinner_selector"
+                        android:spinnerMode="dropdown"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_marginTop="35dp"
+                android:id="@+id/btn_siguiente"
+                android:textColor="#fff"
+                android:background="@drawable/buttonstyleithgradient"
+                android:layout_marginLeft="20dp"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:text="Siguiente"
+                android:padding="0dp"
+                android:layout_marginBottom="20dp"/>
+
+            <!--<LinearLayout
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,56 +428,54 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:text="Siguiente"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"/>-->
 
         </LinearLayout>
     </ScrollView>
     <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/multiple_actions"
-        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
         app:fab_addButtonColorNormal="#f9f6f6"
         app:fab_addButtonColorPressed="#dadfe1"
         app:fab_addButtonPlusIconColor="#4dbdd9"
-        app:fab_labelStyle="@style/menu_labels_style"
-        >
+        app:fab_labelStyle="@style/menu_labels_style">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
+        <!--<com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_guardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/action_guardar"
-            app:fab_icon="@drawable/ic_save"
             app:fab_addButtonColorNormal="#4dbdd9"
             app:fab_addButtonColorPressed="#ffffff"
-            app:fab_size="mini"
-            app:fab_title="Guardar"
-            />
+            app:fab_icon="@drawable/ic_save"
+            app:fab_size="mini" />-->
+        <!--app:fab_title="Guardar"-->
+
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/action_return"
-            app:fab_icon="@drawable/ic_replay"
-            app:fab_addButtonColorNormal="#ffffff"
-            app:fab_addButtonColorPressed="#4dbdd9"
-            app:fab_size="mini"
-            app:fab_title="Regresar"
-            />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/action_menu"
-            app:fab_icon="@drawable/ic_home"
             app:fab_addButtonColorNormal="#ffffff"
             app:fab_addButtonColorPressed="#4dbdd9"
-            app:fab_size="mini"
-            app:fab_title="Regresar"
-            />
+            app:fab_icon="@drawable/ic_replay"
+            app:fab_size="mini" />
+        <!--app:fab_title="Regresar"-->
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_addButtonColorNormal="#ffffff"
+            app:fab_addButtonColorPressed="#4dbdd9"
+            app:fab_icon="@drawable/ic_home"
+            app:fab_size="mini" />
+        <!--app:fab_title="Regresar"-->
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

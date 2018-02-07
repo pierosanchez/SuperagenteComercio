@@ -11,8 +11,9 @@ import com.example.administrador.superagentecomercio.R;
 
 public class TerminosCondiciones extends Activity {
 
-    RadioButton radioTerminosCondiciones;
-    Button btn_salir;
+    private RadioButton radioTerminosCondiciones;
+    private Button btn_salir;
+    private String numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,14 @@ public class TerminosCondiciones extends Activity {
 
         btn_salir = (Button) findViewById(R.id.btn_salir);
 
+        Bundle bundle = getIntent().getExtras();
+        numero = bundle.getString("numero");
+
         radioTerminosCondiciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TerminosCondiciones.this, IngresoInformacionComercio.class);
+                intent.putExtra("numero", numero);
                 startActivity(intent);
                 finish();
             }

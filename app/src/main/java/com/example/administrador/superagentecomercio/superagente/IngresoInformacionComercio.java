@@ -45,6 +45,7 @@ public class IngresoInformacionComercio extends Activity {
     String departamentoUbigeo, departamentoUbigeoDesc, distritoUbigeo, distritoUbigeoDesc, provinciaUbigeo, provinciaUbigeoDesc;
     int distrito, provincia, departamento;
     private Comercio comercio;
+    private String numero;
 
 
     @Override
@@ -63,6 +64,9 @@ public class IngresoInformacionComercio extends Activity {
         sp_departamento = (Spinner) findViewById(R.id.sp_departamento);
         sp_provincia = (Spinner) findViewById(R.id.sp_provincia);
         sp_distrito = (Spinner) findViewById(R.id.sp_distrito);
+
+        Bundle bundle = getIntent().getExtras();
+        numero = bundle.getString("numero");
 
         ubigeoArrayListDepartamento = null;
         departamentosUbigeoAdapter = new DepartamentosUbigeoAdapter(ubigeoArrayListDepartamento, getApplication());
@@ -188,6 +192,7 @@ public class IngresoInformacionComercio extends Activity {
 
                     Intent intent = new Intent(IngresoInformacionComercio.this, AfiliacionComercio.class);
                     intent.putExtra("comercio", comercio);
+                    intent.putExtra("numero", numero);
                     startActivity(intent);
                     finish();
 

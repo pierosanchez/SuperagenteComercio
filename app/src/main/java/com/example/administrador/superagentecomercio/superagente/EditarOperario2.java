@@ -1,6 +1,8 @@
 package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,7 +44,7 @@ public class EditarOperario2 extends Activity {
 
     private Comercio idcomercio;
 
-    String id_ope,dni,nombre,paterno,materno,celular,fono,sexo,direccion;
+    String id_ope,dni,nombre,paterno,materno,celular,fono,sexo,direccion,usuario;
 
     String departamentoUbigeo, departamentoUbigeoDesc, distritoUbigeo,
             distritoUbigeoDesc, provinciaUbigeo, provinciaUbigeoDesc;
@@ -53,6 +55,7 @@ public class EditarOperario2 extends Activity {
         setContentView(R.layout.editar_operario2);
 
         btn_regresar = (FloatingActionButton) findViewById(R.id.action_return);
+        btn_menu = (FloatingActionButton)findViewById(R.id.action_menu);
         btn_guardarOperario = (Button) findViewById(R.id.btn_guardarOperario);
 
         et_direccion = (EditText) findViewById(R.id.et_direccion);
@@ -80,6 +83,7 @@ public class EditarOperario2 extends Activity {
         fono = bundle.getString("fono");
         sexo = bundle.getString("sexo");
         direccion = bundle.getString("direccion");
+        usuario = bundle.getString("user");
 
         et_direccion.setText(direccion);
 
@@ -141,11 +145,23 @@ public class EditarOperario2 extends Activity {
             }
         });
 
+
         btn_regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditarOperario2.this, ListarOperario.class);
-                intent.putExtra("comercio", idcomercio);
+                Intent intent = new Intent(EditarOperario2.this, EditarOperario.class);
+                //intent.putExtra("comercio", idcomercio);
+                intent.putExtra("idcomercio", idcomercio);
+                intent.putExtra("id_ope", id_ope);
+                intent.putExtra("dni_ope", dni);
+                intent.putExtra("nom_ope", nombre);
+                intent.putExtra("pater_ope", paterno);
+                intent.putExtra("mater_ope", materno);
+                intent.putExtra("celular", celular);
+                intent.putExtra("fono_fijo", fono);
+                intent.putExtra("sexo", sexo);
+                intent.putExtra("user", usuario);
+
                 startActivity(intent);
                 finish();
             }
@@ -159,7 +175,19 @@ public class EditarOperario2 extends Activity {
                 EditarOperario2.actualizarOperario insertar = new EditarOperario2.actualizarOperario();
                 insertar.execute();
 
+                Intent intent = new Intent(EditarOperario2.this, ListarOperario.class);
+                intent.putExtra("comercio", idcomercio);
+                startActivity(intent);
+                finish();
 
+
+            }
+        });
+
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelar();
             }
         });
 
@@ -178,7 +206,7 @@ public class EditarOperario2 extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ActualizarOperario(id_ope, dni, nombre,  paterno,  materno, celular, fono,  sexo, idcomercio.getIdComercio(), departamentoUbigeoDesc, distritoUbigeoDesc, provinciaUbigeoDesc, direccion, "934103162");
+                user = dao.ActualizarOperario(id_ope, dni, nombre,  paterno,  materno, celular, fono,  sexo, idcomercio.getIdComercio(), departamentoUbigeoDesc, distritoUbigeoDesc, provinciaUbigeoDesc, direccion, usuario);
 
             } catch (Exception e) {
                 user = null;
@@ -289,5 +317,30 @@ public class EditarOperario2 extends Activity {
         }
     }
 
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Está seguro que desea regresar al menú?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(EditarOperario2.this, MenuCliente.class);
+                intent.putExtra("comercio", idcomercio);
+                intent.putExtra("user", usuario);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
 }
 
