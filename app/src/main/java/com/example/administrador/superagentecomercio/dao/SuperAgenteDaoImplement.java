@@ -28,6 +28,287 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni) {
+        VoucherPagoServicioEntity tipoTarjetaEntity = new VoucherPagoServicioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoServicios/?numeroUniS=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS) {
+        VoucherPagoServicioEntity voucherPagoServicio;
+
+        try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarVoucherPagoServicio/?numero_unicoS=" + URLEncoder.encode(numero_unicoS, "UTF-8") +
+                    "&fechaS=" + URLEncoder.encode(fechaS, "UTF-8") +
+                    "&horaS=" + URLEncoder.encode(horaS, "UTF-8") +
+                    "&servicio=" + URLEncoder.encode(servicio, "UTF-8") +
+                    "&tipo_servicio=" + URLEncoder.encode(tipo_servicio, "UTF-8") +
+                    "&cod_clienteS=" + URLEncoder.encode(cod_clienteS, "UTF-8") +
+                    "&nombre_tipo_servicio=" + URLEncoder.encode(nombre_tipo_servicio, "UTF-8") +
+                    "&persona_paga=" + URLEncoder.encode(persona_paga, "UTF-8") +
+                    "&dni_persona=" + URLEncoder.encode(dni_persona, "UTF-8") +
+                    "&forma_pagoS=" + URLEncoder.encode(forma_pagoS, "UTF-8") +
+                    "&importeS=" + URLEncoder.encode(importeS, "UTF-8") +
+                    "&comisionS=" + URLEncoder.encode(comisionS, "UTF-8") +
+                    "&totalS=" + URLEncoder.encode(totalS, "UTF-8");
+
+            voucherPagoServicio = new VoucherPagoServicioEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherPagoServicioEntity voucherPagoServicioEntity = new VoucherPagoServicioEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoS);
+                    voucherPagoServicioEntity.setFecha(fechaS);
+                    voucherPagoServicioEntity.setHora(horaS);
+                    voucherPagoServicioEntity.setServicio(servicio);
+                    voucherPagoServicioEntity.setTipoServicio(tipo_servicio);
+                    voucherPagoServicioEntity.setCodCliente(cod_clienteS);
+                    voucherPagoServicioEntity.setNombreTipoServicio(nombre_tipo_servicio);
+                    voucherPagoServicioEntity.setPersonaPaga(persona_paga);
+                    voucherPagoServicioEntity.setDniPersona(dni_persona);
+                    voucherPagoServicioEntity.setFormaPago(forma_pagoS);
+                    voucherPagoServicioEntity.setImporte(importeS);
+                    voucherPagoServicioEntity.setComision(comisionS);
+                    voucherPagoServicioEntity.setTotal(totalS);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public ArrayList<EmpresasServiciosEntity> listarEmpresasServicios() {
+
+        ArrayList<EmpresasServiciosEntity> listaServiciosEntities = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarEmpresasServicios/?listar=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        EmpresasServiciosEntity empresasServiciosEntity = new EmpresasServiciosEntity();
+                        empresasServiciosEntity.setCod_emp_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_emp_servicio")));
+                        empresasServiciosEntity.setDes_emp_servicio(utils.getValueStringOrNull(jsonObject, "des_emp_servicio"));
+                        empresasServiciosEntity.setCod_tipo_emps_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_emps_servicio")));
+                        empresasServiciosEntity.setNombre_recibo(utils.getValueStringOrNull(jsonObject, "nombre_recibo"));
+                        listaServiciosEntities.add(empresasServiciosEntity);
+                    }
+                } else {
+                    listaServiciosEntities = null;
+                }
+            } else {
+                listaServiciosEntities = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaServiciosEntities;
+    }
+
+    @Override
+    public ArrayList<ServiciosPublicEntity> ListarServiciosPublicos() {
+
+        ArrayList<ServiciosPublicEntity> listaServiciosEntities = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarServiciosPublicos/?nully=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        ServiciosPublicEntity serviciospublic = new ServiciosPublicEntity();
+                        serviciospublic.setCod_inst_edu(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_inst_edu")));
+                        serviciospublic.setDes_inst_edu(utils.getValueStringOrNull(jsonObject, "des_inst_edu"));
+                        listaServiciosEntities.add(serviciospublic);
+                    }
+                } else {
+                    listaServiciosEntities = null;
+                }
+            } else {
+                listaServiciosEntities = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaServiciosEntities;
+    }
+
+    @Override
+    public ArrayList<ClubsEntity> ListadoClubs() {
+
+        ArrayList<ClubsEntity> listaClubes = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "/webApi_2/apigeneral/ApiGeneral/ListadoClubs/?nothing=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        ClubsEntity clubEntity = new ClubsEntity();
+                        clubEntity.setCod_club(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_club")));
+                        clubEntity.setDes_club(utils.getValueStringOrNull(jsonObject, "des_club"));
+                        listaClubes.add(clubEntity);
+                    }
+                } else {
+                    listaClubes = null;
+                }
+            } else {
+                listaClubes = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaClubes;
+    }
+
+    @Override
+    public ArrayList<NumeroUnico> getNumeroUnico() {
+        ArrayList<NumeroUnico> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/NumeroUnico/?vac02=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        NumeroUnico tipoTarjetaEntity = new NumeroUnico();
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                } else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaTipoTarjeta;
+    }
+
+    @Override
+    public VoucherPagoConsumo InsertarVoucherPagoConsumoComercio(String numero_unico, String fecha, String hora, String importe, String nro_tarjeta, String id_comercio, String nombre_comercio, String distrito_comercio, String operario_comercio, int estadoVoucher) {
+        VoucherPagoConsumo voucher;
+        try {
+            voucher = new VoucherPagoConsumo();
+
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoConsumoComercio/?numero_unico=" + URLEncoder.encode(numero_unico, "UTF-8")
+                    + "&fecha=" + URLEncoder.encode(fecha, "UTF-8")
+                    + "&hora=" + URLEncoder.encode(hora, "UTF-8")
+                    + "&importe=" + URLEncoder.encode(importe, "UTF-8")
+                    + "&nro_tarjeta=" + URLEncoder.encode(nro_tarjeta, "UTF-8")
+                    + "&id_comercio=" + URLEncoder.encode(id_comercio, "UTF-8")
+                    + "&nombre_comercio=" + URLEncoder.encode(nombre_comercio, "UTF-8")
+                    + "&distrito_comercio=" + URLEncoder.encode(distrito_comercio, "UTF-8")
+                    + "&operario_comercio=" + URLEncoder.encode(operario_comercio, "UTF-8")
+                    + "&estadoVoucher=" + URLEncoder.encode(String.valueOf(estadoVoucher), "UTF-8");
+
+            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
+            Log.e("Json", arrayJason.toString());
+            if (arrayJason != null) {
+                if (arrayJason.length() > 0) {
+                    JSONObject jsonObject = arrayJason.getJSONObject(0);
+                    voucher.setRptaC(utils.getValueStringOrNull(jsonObject, "rptaC"));
+                } else {
+                    voucher = null;
+                }
+            } else {
+                voucher = null;
+            }
+
+        } catch (Exception e) {
+            Log.getStackTraceString(e);
+            voucher = null;
+        }
+
+        return voucher;
+    }
+
+    @Override
+    public Operario ValidarClaveOperario(String Clave_operario) {
+        Operario operario;
+        try {
+            operario = new Operario();
+
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/validaClaveOperario/?Clave_operario=" + URLEncoder.encode(Clave_operario, "UTF-8");
+
+            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
+            Log.e("Json", arrayJason.toString());
+            if (arrayJason != null) {
+                if (arrayJason.length() > 0) {
+                    JSONObject jsonObject = arrayJason.getJSONObject(0);
+                    operario.setValidPassOpe(utils.getValueStringOrNull(jsonObject, "valid_pass_ope"));
+                    operario.setComercio(utils.getValueStringOrNull(jsonObject, "comercio"));
+                    operario.setId_ope(utils.getValueStringOrNull(jsonObject, "id_ope"));
+                    operario.setNom_ope(utils.getValueStringOrNull(jsonObject, "nom_ope"));
+                    operario.setPater_ope(utils.getValueStringOrNull(jsonObject, "pater_ope"));
+                    operario.setMater_ope(utils.getValueStringOrNull(jsonObject, "mater_ope"));
+                    operario.setDistrito(utils.getValueStringOrNull(jsonObject, "distrito"));
+                } else {
+                    operario = null;
+                }
+            } else {
+                operario = null;
+            }
+
+        } catch (Exception e) {
+            Log.getStackTraceString(e);
+            operario = null;
+        }
+
+        return operario;
+    }
+
+    @Override
     public Operario InsertarOperario(String dni_ope,String nom_ope, String pater_ope, String mater_ope, String celular, String fono_fijo, String sexo, String comercio, String departamento, String distrito, String provincia, String direccion, String usu_reg) {//, String cod_interbancario, String num_tarjeta_beneficiario, int emisor_tarjeta, int cod_banco, int cod_tipo_cuenta) {
         Operario operario;
         try {
@@ -469,7 +750,10 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new PasswordComercio();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarClaveComercio/?clave_comercio=" + clave_comercio + "&id_Comercio=" + id_Comercio + "&clave_nueva_comercio=" + clave_nueva_comercio + "&respuesta_pregunta_comercio=" + respuesta_pregunta_comercio;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarClaveComercio/?clave_comercio=" + URLEncoder.encode(clave_comercio, "UTF-8")
+                    + "&id_Comercio=" + URLEncoder.encode(id_Comercio , "UTF-8")
+                    + "&clave_nueva_comercio=" + URLEncoder.encode(clave_nueva_comercio, "UTF-8")
+                    + "&respuesta_pregunta_comercio=" + URLEncoder.encode(respuesta_pregunta_comercio, "UTF-8");
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());

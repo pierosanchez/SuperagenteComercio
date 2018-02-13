@@ -24,18 +24,18 @@ import java.util.ArrayList;
 
 public class ListarOperario extends Activity {
 
-    FloatingActionButton btn_menu,btn_agregar;
+    private FloatingActionButton btn_menu, btn_agregar;
     private Operario operario;
     private Comercio idcomercio;
-    ListView lv_listado_operario;
+    private ListView lv_listado_operario;
     private ProgressBar circleProgressBar;
 
-    OperarioAdapter operarioAdapter;
-    ArrayList<Operario> arrayoperario;
+    private OperarioAdapter operarioAdapter;
+    private ArrayList<Operario> arrayoperario;
 
-    private String id_ope,dni_ope,nom_ope,pater_ope,mater_ope,celular,fono_fijo,comercio,
-            comercioj,direccion,user;
-    private String sexo,departamento,distrito,provincia;
+    private String id_ope, dni_ope, nom_ope, pater_ope, mater_ope, celular, fono_fijo, comercio,
+            comercioj, direccion, user;
+    private String sexo, departamento, distrito, provincia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class ListarOperario extends Activity {
         lv_listado_operario = (ListView) findViewById(R.id.lv_listado_operario);
 
         btn_menu = (FloatingActionButton) findViewById(R.id.action_menu);
-        btn_menu = (FloatingActionButton)findViewById(R.id.action_menu);
+        btn_menu = (FloatingActionButton) findViewById(R.id.action_menu);
         btn_agregar = (FloatingActionButton) findViewById(R.id.action_agregar);
 
         Bundle bundle = getIntent().getExtras();
@@ -53,9 +53,7 @@ public class ListarOperario extends Activity {
         user = bundle.getString("user");
 
         arrayoperario = null;
-
         operarioAdapter = new OperarioAdapter(arrayoperario, getApplication());
-
         lv_listado_operario.setAdapter(operarioAdapter);
 
         ejecutarLista();
@@ -79,27 +77,25 @@ public class ListarOperario extends Activity {
                 provincia = operarioAdapter.getItem(position).getProvincia();
 
 
-                    Intent intent = new Intent(ListarOperario.this, DetalleOperario.class);
-                    intent.putExtra("id_ope", id_ope);
-                    intent.putExtra("dni_ope", dni_ope);
-                    intent.putExtra("nom_ope", nom_ope);
-                    intent.putExtra("pater_ope", pater_ope);
-                    intent.putExtra("mater_ope", mater_ope);
-                    intent.putExtra("fono_fijo", fono_fijo);
-                    intent.putExtra("celular", celular);
-                    intent.putExtra("comercio", comercio);
-                    intent.putExtra("comercioj", comercioj);
-                    intent.putExtra("sexo", sexo);
-                    intent.putExtra("departamento", departamento);
-                    intent.putExtra("distrito", distrito);
-                    intent.putExtra("provincia", provincia);
-                    intent.putExtra("direccion", direccion);
-                    intent.putExtra("idcomercio", idcomercio);
-                    intent.putExtra("user", user);
-                    startActivity(intent);
-                    finish();
-
-
+                Intent intent = new Intent(ListarOperario.this, DetalleOperario.class);
+                intent.putExtra("id_ope", id_ope);
+                intent.putExtra("dni_ope", dni_ope);
+                intent.putExtra("nom_ope", nom_ope);
+                intent.putExtra("pater_ope", pater_ope);
+                intent.putExtra("mater_ope", mater_ope);
+                intent.putExtra("fono_fijo", fono_fijo);
+                intent.putExtra("celular", celular);
+                intent.putExtra("comercio", comercio);
+                intent.putExtra("comercioj", comercioj);
+                intent.putExtra("sexo", sexo);
+                intent.putExtra("departamento", departamento);
+                intent.putExtra("distrito", distrito);
+                intent.putExtra("provincia", provincia);
+                intent.putExtra("direccion", direccion);
+                intent.putExtra("idcomercio", idcomercio);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -151,19 +147,19 @@ public class ListarOperario extends Activity {
     }
 
 
-    private void ejecutarLista(){
+    private void ejecutarLista() {
         //idcomercio = operario.getComercio();
 
         try {
             ListarOperario.ListadoOperario listadoOperario = new ListarOperario.ListadoOperario();
             listadoOperario.execute();
-        } catch (Exception e){
+        } catch (Exception e) {
             //listadoBeneficiario = null;
         }
 
     }
 
-    private class ListadoOperario extends AsyncTask<String,Void,Void> {
+    private class ListadoOperario extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
 
@@ -180,8 +176,8 @@ public class ListarOperario extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             operarioAdapter.setNewListOperario(arrayoperario);
-            /*operarioAdapter.notifyDataSetChanged();
-            circleProgressBar.setVisibility(View.GONE);*/
+            operarioAdapter.notifyDataSetChanged();
+            //circleProgressBar.setVisibility(View.GONE);
         }
     }
 
@@ -210,8 +206,6 @@ public class ListarOperario extends Activity {
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
-
-
 
 
 }

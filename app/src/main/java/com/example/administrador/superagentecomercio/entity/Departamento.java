@@ -5,6 +5,7 @@ package com.example.administrador.superagentecomercio.entity;
  */
 
 public class Departamento {
+
     private int idDepartamento;
     private String descripcionDepartamento;
 

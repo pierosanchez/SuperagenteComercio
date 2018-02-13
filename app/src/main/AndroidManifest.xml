@@ -46,7 +46,13 @@
         <activity android:name=".superagente.EditarOperario2" />
         <activity android:name=".superagente.LoginNumeroComercio" />
         <activity android:name=".superagente.LoginPasswordComercio" />
-        <activity android:name=".superagente.IngresoTarjetaCliente"></activity>
+        <activity android:name=".superagente.IngresoTarjetaCliente" />
+        <activity android:name=".superagente.VoucherPagoConsumoPin" />
+        <activity android:name=".superagente.SeleccionServicioPagar" />
+        <activity android:name=".superagente.SeleccionRecibosPagar" />
+        <activity android:name=".superagente.MontoPagoPinPagoServicios" />
+        <activity android:name=".superagente.ConformidadPagoServicios" />
+        <activity android:name=".superagente.VoucherPagoServicio"></activity>
     </application>
 
 </manifest>

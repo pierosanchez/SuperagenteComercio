@@ -3,6 +3,7 @@ package com.example.administrador.superagentecomercio.superagente;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,15 +11,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.administrador.superagentecomercio.R;
+import com.example.administrador.superagentecomercio.adapter.DetalleClaveAccesoAdapter;
+import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoImplement;
+import com.example.administrador.superagentecomercio.dao.SuperAgenteDaoInterface;
 import com.example.administrador.superagentecomercio.entity.Comercio;
+import com.example.administrador.superagentecomercio.entity.Operario;
+import com.example.administrador.superagentecomercio.entity.PasswordComercio;
 
 public class MenuCliente extends Activity {
 
-    private Button btn_salir, btn_cambio_clave, btn_mantenimiento, btn_anulacion, btn_reporte_movimientos, btn_pago_consumo;
+    private Button btn_salir, btn_cambio_clave, btn_mantenimiento, btn_anulacion, btn_reporte_movimientos,
+            btn_pago_consumo, btn_pago_servicio;
     private Comercio comercio;
     //parte de la ventana emergente
     private Button btn_aceptar, btn_cancelar;
     private EditText txt_clave_operario;
+    private String nomComercio, idOperario, nomOperario, apePaterOperario, apeMaterOperario, distritoComercio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class MenuCliente extends Activity {
         btn_anulacion = (Button) findViewById(R.id.btn_anulacion);
         btn_reporte_movimientos = (Button) findViewById(R.id.btn_reporte_movimientos);
         btn_pago_consumo = (Button) findViewById(R.id.btn_pago_consumo);
+        btn_pago_servicio = (Button) findViewById(R.id.btn_pago_servicio);
 
         Bundle extra = getIntent().getExtras();
         comercio = extra.getParcelable("comercio");
@@ -76,6 +85,16 @@ public class MenuCliente extends Activity {
             }
         });
 
+        btn_pago_servicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuCliente.this, SeleccionServicioPagar.class);
+                intent.putExtra("comercio", comercio);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         btn_salir.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -103,7 +122,7 @@ public class MenuCliente extends Activity {
         txt_clave_operario = (EditText) view.findViewById(R.id.txt_clave_operario);
 
         btn_aceptar = (Button) view.findViewById(R.id.btn_aceptar);
-        btn_cancelar = (Button) view.findViewById(R.id.btn_cancelar);
+        //btn_cancelar = (Button) view.findViewById(R.id.btn_cancelar);
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,26 +130,66 @@ public class MenuCliente extends Activity {
                 String _claveOperario = txt_clave_operario.getText().toString();
 
                 if (_claveOperario.length() != 0){
-                    /*MenuCliente.cambioClaveOperario cambioClave = new MenuCliente.cambioClaveOperario();
-                    cambioClave.execute();*/
-
-                    finish();
+                    MenuCliente.validarClaveOperario validarClave = new MenuCliente.validarClaveOperario();
+                    validarClave.execute();
                 } else if (_claveOperario.length() == 0) {
                     Toast.makeText(MenuCliente.this, "Ingrese la clave del operario", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        btn_cancelar.setOnClickListener(new View.OnClickListener() {
+        /*btn_cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
-        });
+        });*/
 
         builder.setView(view);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
 
+    private class validarClaveOperario extends AsyncTask<String, Void, Operario> {
+
+        String clave = txt_clave_operario.getText().toString();
+
+        @Override
+        protected Operario doInBackground(String... params) {
+            Operario user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ValidarClaveOperario(clave);
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(Operario usuarioEntity) {
+            if (usuarioEntity.getValidPassOpe().equals("00")) {
+                nomComercio = usuarioEntity.getComercio();
+                idOperario = usuarioEntity.getId_ope();
+                nomOperario = usuarioEntity.getNom_ope();
+                apePaterOperario = usuarioEntity.getPater_ope();
+                apeMaterOperario = usuarioEntity.getMater_ope();
+                distritoComercio = usuarioEntity.getDistrito();
+                Intent intent = new Intent(MenuCliente.this, IngresoTarjetaCliente.class);
+                intent.putExtra("comercio", comercio);
+                intent.putExtra("nomComercio", nomComercio);
+                intent.putExtra("idOperario", idOperario);
+                intent.putExtra("nomOperario", nomOperario);
+                intent.putExtra("apePaterOperario", apePaterOperario);
+                intent.putExtra("apeMaterOperario", apeMaterOperario);
+                intent.putExtra("distritoComercio", distritoComercio);
+                startActivity(intent);
+                finish();
+            } else if (usuarioEntity.getValidPassOpe().equals("01")) {
+                Toast.makeText(MenuCliente.this, "La clave ingresada es incorrecta", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }

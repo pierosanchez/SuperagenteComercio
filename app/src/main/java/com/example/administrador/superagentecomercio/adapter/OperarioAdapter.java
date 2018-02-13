@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 
 public class OperarioAdapter extends BaseAdapter {
+
     ArrayList<Operario> items;
     Context context;
     LayoutInflater layoutInflater = null;

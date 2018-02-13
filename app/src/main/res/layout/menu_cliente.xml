@@ -59,6 +59,18 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/btn_pago_servicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_pago_servicios" />
+
+                <Button
+                    android:id="@+id/btn_pago_consumo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_pago_consumo" />
+
+                <Button
                     android:id="@+id/btn_anulacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,12 +111,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_mantenimiento_menu" />
-
-                <Button
-                    android:id="@+id/btn_pago_consumo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_pago_consumo" />
 
             </LinearLayout>
 

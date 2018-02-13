@@ -38,11 +38,11 @@ public class LoginNumeroComercio extends Activity {
 
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
 
-        callingActivity = this.getCallingActivity().getClassName();
+        /*callingActivity = this.getCallingActivity().getClassName();
 
         if (callingActivity.equals(Constante.ACTIVITYROOT + "Splash")) {
             setNumeroCelUsuarioFromSQLite();
-        }
+        }*/
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override

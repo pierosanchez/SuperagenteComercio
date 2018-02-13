@@ -14,6 +14,10 @@
     <string name="btn_validar">VALIDAR</string>
     <string name="btn_anular_operacion">ANULAR OPERACION</string>
     <string name="tv_ok">OK</string>
+    <string name="btn_confirmar_operacion">CONFIRMAR OPERACIÓN</string>
+    <string name="btn_cancelar_pago_servicio">CANCELAR OPERACIÓN</string>
+    <string name="btn_pagar_otros_servicios">PAGAR OTROS SERVICIOS</string>
+    <string name="tv_pago_servicios">PAGO DE SERVICIOS</string>
     <string name="tv_rayitas">==========================================</string>
 
     <!-- pantalla de logeo del usuario del comercio -->
@@ -142,8 +146,73 @@
     <!-- Pantalla de Reporte de movimientos -->
 
     <string name="titulo_reporte_movimientos">REPORTE DE MOVIMIENTOS</string>
-    <string name="tv_ingrese_clave_operario">INGRESE LA CLAVE DEL OPERARIO</string>
+    <string name="tv_ingrese_clave_operario">INGRESE LA CLAVE DEL OPERADOR</string>
     <string name="btn_pago_consumo">PAGO DE CONSUMOS</string>
+    <string name="titulo_ingreso_tarjeta_cliente">INGRESO DE TARJETA DEL CLIENTE</string>
+    <string name="tv_ingreso_tarjeta_cliente">INGRESE EL NUMERO DE TARJETA DEL CLIENTE</string>
+    <string name="rdbtn_codigo_cvv">CÓDIGO CVV</string>
+    <string name="rdbtn_numero_pin">NUMERO DE PIN</string>
+    <string name="tv_ingrese">INGRESE DATO</string>
+    <string name="titulo_voucher_pago_consumo">VOUCHER DE PAGO DE CONSUMO</string>
+    <string name="tv_transaccion_exitosa">TRANSACCIÓN EXITOSA</string>
+    <string name="tv_pin_verificado">PIN VERIFICADO POR EL EMISOR</string>
+    <string name="btn_efectuar_otra_operacion">EFECTUAR OTRA OPERACIÓN</string>
+    <string name="tv_nombre_operario">NOMBRE DEL OPERARIO</string>
+    <string name="tv_seleccionar_segun_tarjeta">SELECCIONAR SEGÚN TIPO TARJETA</string>
+    <string name="tv_numero_tarjeta">NÚMERO DE TARJETA</string>
+
+    <!-- Pantalla de Seleccion del servicio a pagar -->
+
+    <string name="titulo_seleccion_servicio_pagar">SELECCIÓN DEL SERVICIO A PAGAR</string>
+    <string name="tv_seleccione_servicio">SELECCIONE EL SERVICIO</string>
+    <string name="tv_seleccione_tipo_servicio">SELECCIONE TIPO DE SERVICIO</string>
+    <string name="tv_ingrese_numero_servicio">CÓDIGO DEL</string>
+
+    <!-- Pantalla de Cambio de Clave de acceso exitosa -->
+
+    <string name="titulo_seleccion_recibos_servicios_pagar">SELECCIÓN DE RECIBOS A PAGAR</string>
+    <string name="tv_suministro_pago_servicio">NÚMERO DE RECIBO:</string>
+    <string name="tv_titular_pago_servicio">TITULAR: </string>
+    <string name="tv_f_vencimiento_recibo_servicio">F. VENCIMIENTO</string>
+    <string name="tv_monto_recibo_servicio">MONTO</string>
+
+    <!-- Pantalla de Monto de Pago con Pin - Pago de Servicios -->
+
+    <string name="titulo_monto_pago_pin_pago_servicios">INGRESO DEL MONTO DE PAGO CON PIN</string>
+    <string name="tv_nombre_cliente_pago_servicio">NOMBRE DEL CLIENTE: </string>
+    <string name="tv_tarjeta_cifrada_pago_servicios">TARJETA CIFRADA: </string>
+    <string name="tv_ingrese_pin_tarjeta_servicio">INGRESE PIN</string>
+    <string name="tv_servicio_pagar">SERVICIO A PAGAR:</string>
+    <string name="tv_tipo_servicio_pagar">TIPO DE SERVICIO:</string>
+    <string name="tv_pago_cuotas">¿PAGO EN CUOTAS?</string>
+    <string name="tv_ingrese_ping">INGRESE PIN</string>
+    <string name="tv_cantidad_cuotas">CANTIDAD DE CUOTAS</string>
+
+    <!-- Pantalla de Conformidad de pago de servicios -->
+
+    <string name="titulo_conformidad_pago_servicios">CONFORMIDAD DE PAGO DE SERVICIOS</string>
+    <string name="tv_numero_tarjeta_pagar_servicios">NÚMERO DE TARJETA:</string>
+    <string name="tv_servicio_pagar_conformidad">SERVICIO A PAGAR:</string>
+    <string name="tv_dni_cliente_conformidad">DNI DEL CLIENTE:</string>
+    <string name="tv_comision_servicio_pagar">COMISIÓN DEL SERVICIO:</string>
+    <string name="tv_total_servicio_pagar">IMPORTE TOTAL:</string>
+    <string name="tv_importe_pago_servicio">COSTO DEL SERVICIO</string>
+    <string name="tv_numero_recibo">CÓDIGO DEL CLIENTE</string>
+    <string name="tv_nombre_titular">NOMBRE DEL TITULAR</string>
+
+    <!-- Pantalla de Voucher de pago de servicios -->
+
+    <string name="titulo_voucher_pago_servicio">VOUCHER DE PAGO DEL SERVICIO</string>
+    <string name="tv_servicio_voucher">SERVICIO:</string>
+    <string name="tv_tipo_servicio_voucher">TIPO DE SERVICIO:</string>
+    <string name="tv_num_suministro_voucher">CÓDIGO DEL CLIENTE:</string>
+    <string name="tv_pagado_por_voucher">PAGADO POR:</string>
+    <string name="tv_dni_servicios">DNI:</string>
+    <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>
+    <string name="tv_importe_voucher">IMPORTE:</string>
+    <string name="tv_comision_operacion_voucher">COMISIÓN:</string>
+    <string name="tv_total_servicio_pagar_voucher">TOTAL:</string>
+    <string name="tv_gracias_preferencia">*** GRACIAS POR SU PREFERENCIA ***</string>
 
 
 </resources>

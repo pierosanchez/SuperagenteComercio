@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Operario implements Parcelable {
+
     private String id_ope,dni_ope,nom_ope,pater_ope,mater_ope,celular,fono_fijo;
     private String sexo;
     private String comercio;
@@ -18,6 +19,7 @@ public class Operario implements Parcelable {
     private String direccion;
     private String usu_reg;
     private String usu_upd;
+    private String validPassOpe;
 
     //*************************************************************************************
 
@@ -55,6 +57,15 @@ public class Operario implements Parcelable {
     }
 
     //*************************************************************************************
+
+
+    public String getValidPassOpe() {
+        return validPassOpe;
+    }
+
+    public void setValidPassOpe(String validPassOpe) {
+        this.validPassOpe = validPassOpe;
+    }
 
     public String getId_ope() {
         return id_ope;

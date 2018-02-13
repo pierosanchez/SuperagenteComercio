@@ -36,4 +36,12 @@ public interface SuperAgenteDaoInterface {
     ArrayList<UbigeoEntity> ListarDistritoUbigeo(String ubigeo1, String ubigeo2);
     VoucherPagoConsumo AnulacionVoucherConsumo(String ubigeo1);
     Comercio ValidaLoginNumeroComercio(String ubigeo1);
+    Operario ValidarClaveOperario(String Clave_operario);
+    VoucherPagoConsumo InsertarVoucherPagoConsumoComercio(String numero_unico, String fecha, String hora, String importe, String nro_tarjeta, String id_comercio, String nombre_comercio, String distrito_comercio, String operario_comercio, int estadoVoucher);
+    ArrayList<NumeroUnico> getNumeroUnico();
+    ArrayList<ClubsEntity> ListadoClubs();
+    ArrayList<ServiciosPublicEntity> ListarServiciosPublicos();
+    ArrayList<EmpresasServiciosEntity> listarEmpresasServicios();
+    VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS);
+    VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni);
 }
