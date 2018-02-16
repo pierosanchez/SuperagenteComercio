@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/banco_comercio_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/banco_comercio_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".superagente.Splash">
@@ -35,9 +35,7 @@
         <activity android:name=".superagente.ListadoAnulacionesComercio" />
         <activity android:name=".superagente.DetalleConsumo" />
         <activity android:name=".superagente.ListarOperario" />
-        <activity
-            android:name=".superagente.AgregarOperario"
-            android:label="@string/title_activity_agregar_operario" />
+        <activity android:name=".superagente.AgregarOperario" />
         <activity android:name=".superagente.EditarOperario" />
         <activity android:name=".superagente.DetalleOperario" />
         <activity android:name=".superagente.ReporteMovimientos" />

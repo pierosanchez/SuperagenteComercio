@@ -111,6 +111,7 @@ public class LoginPasswordComercio extends Activity {
                         circleProgressBar.setVisibility(View.GONE);
                         Intent sanipesIntent = new Intent(LoginPasswordComercio.this, MenuCliente.class);
                         sanipesIntent.putExtra("comercio", usuarioEntity);
+                        sanipesIntent.putExtra("numero", numero);
                         startActivity(sanipesIntent);
                         finish();
                     } catch (Exception e) {

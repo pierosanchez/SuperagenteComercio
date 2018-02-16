@@ -26,7 +26,7 @@ public class MenuCliente extends Activity {
     //parte de la ventana emergente
     private Button btn_aceptar, btn_cancelar;
     private EditText txt_clave_operario;
-    private String nomComercio, idOperario, nomOperario, apePaterOperario, apeMaterOperario, distritoComercio;
+    private String nomComercio, idOperario, nomOperario, apePaterOperario, apeMaterOperario, distritoComercio, numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MenuCliente extends Activity {
 
         Bundle extra = getIntent().getExtras();
         comercio = extra.getParcelable("comercio");
+        numero = extra.getString("numero");
 
 
         btn_cambio_clave.setOnClickListener(new View.OnClickListener(){
@@ -70,6 +71,7 @@ public class MenuCliente extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuCliente.this, ListarOperario.class);
                 intent.putExtra("comercio", comercio);
+                intent.putExtra("user", numero);
                 startActivity(intent);
                 finish();
             }
@@ -122,7 +124,8 @@ public class MenuCliente extends Activity {
         txt_clave_operario = (EditText) view.findViewById(R.id.txt_clave_operario);
 
         btn_aceptar = (Button) view.findViewById(R.id.btn_aceptar);
-        //btn_cancelar = (Button) view.findViewById(R.id.btn_cancelar);
+
+        txt_clave_operario.requestFocus();
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,13 +140,6 @@ public class MenuCliente extends Activity {
                 }
             }
         });
-
-        /*btn_cancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });*/
 
         builder.setView(view);
         AlertDialog dialog = builder.create();
@@ -184,7 +180,7 @@ public class MenuCliente extends Activity {
                 intent.putExtra("apePaterOperario", apePaterOperario);
                 intent.putExtra("apeMaterOperario", apeMaterOperario);
                 intent.putExtra("distritoComercio", distritoComercio);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             } else if (usuarioEntity.getValidPassOpe().equals("01")) {
                 Toast.makeText(MenuCliente.this, "La clave ingresada es incorrecta", Toast.LENGTH_SHORT).show();

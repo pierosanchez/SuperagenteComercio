@@ -44,4 +44,10 @@ public interface SuperAgenteDaoInterface {
     ArrayList<EmpresasServiciosEntity> listarEmpresasServicios();
     VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS);
     VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni);
+    ArrayList<EmpresasServiciosEntity> ListarEmpresasServiciosComercio();
+    ArrayList<TasasEntity> ListarTasas();
+    ArrayList<TasasReniecEntity> ListarTasasReniec();
+    ArrayList<TasasPnpEntity> ListarTasasPnp();
+    ArrayList<TasasPjEnity> ListarTasasPj();
+    ArrayList<TasasMtcEntity> ListarTasasMtc();
 }

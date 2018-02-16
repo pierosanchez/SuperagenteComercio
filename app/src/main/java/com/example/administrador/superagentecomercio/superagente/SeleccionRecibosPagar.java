@@ -47,14 +47,14 @@ public class SeleccionRecibosPagar extends Activity {
         comercio = bundle.getParcelable("comercio");
         servicio = bundle.getString("servicio");
         num_servicio = bundle.getString("num_servicio");
-        cliente = bundle.getString("cliente");
+        //cliente = bundle.getString("cliente");
         tipo_servicio = bundle.getString("tipo_servicio");
         cli_dni = bundle.getString("cli_dni");
         nombre_recibo = bundle.getString("nombre_recibo");
 
         txt_empresa_servicio_pagar.setText(servicio);
         txt_numero_suministro.setText(num_servicio);
-        txt_nombre_titular_servicio.setText(cliente);
+        //txt_nombre_titular_servicio.setText(cliente);
         tv_nombre_recibo_usuario.setText(nombre_recibo);
 
         chbxk_fecha_vencimiento1.setChecked(true);
@@ -73,7 +73,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("servicio", servicio);
                         intent.putExtra("num_servicio", num_servicio);
                         intent.putExtra("comercio", comercio);
-                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cliente", txt_nombre_titular_servicio.getText().toString());
                         intent.putExtra("tipo_servicio", tipo_servicio);
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("nombre_recibo", nombre_recibo);
@@ -85,7 +85,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("servicio", servicio);
                         intent.putExtra("num_servicio", num_servicio);
                         intent.putExtra("comercio", comercio);
-                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cliente", txt_nombre_titular_servicio.getText().toString());
                         intent.putExtra("tipo_servicio", tipo_servicio);
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("nombre_recibo", nombre_recibo);

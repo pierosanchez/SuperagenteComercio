@@ -28,14 +28,15 @@ public class ConformidadPagoServicios extends Activity {
     Button btn_continuar_pago, btn_cancelar_pago_servicio;
     private Comercio comercio;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda,
-            cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta, nro_unico;
-    int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
+            cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta, nro_unico, tipoTasa;
+    int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco, tasa;
     TextView tv_numero_tarjeta_cifrada_pago_servicio, txt_servicio_pagar, tv_monto_servicio_pagar, tv_monto_comision_servicio_pagar,
             tv_monto_total_servicio_pagar, txt_tipo_moneda_servicio_pagar, tv_nro_servicio_servicio_pagar,
             tv_nombre_titular_pago_servicio, txt_tipo_servicio_pagar,
-            txt_tipo_moneda_total_pagar, txt_tipo_moneda_comision_pagar, tv_dni_cliente_conformidad, tv_nombre_recibo_usuario;
+            txt_tipo_moneda_total_pagar, txt_tipo_moneda_comision_pagar, tv_dni_cliente_conformidad,
+            tv_nombre_recibo_usuario, titulo_conformidad_pago_servicios, tv_importe_servicio, txt_tasa_servicio_pagar;
     DecimalFormat format = new DecimalFormat("0.00");
-    LinearLayout ll_tipo_servicio_pagar_conforme;
+    LinearLayout ll_tipo_servicio_pagar_conforme, ll_tipo_tasa_pagar_conforme;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
 
@@ -45,6 +46,7 @@ public class ConformidadPagoServicios extends Activity {
         setContentView(R.layout.conformidad_pago_servicios);
 
         ll_tipo_servicio_pagar_conforme = (LinearLayout) findViewById(R.id.ll_tipo_servicio_pagar_conforme);
+        ll_tipo_tasa_pagar_conforme = (LinearLayout) findViewById(R.id.ll_tipo_tasa_pagar_conforme);
 
         btn_continuar_pago = (Button) findViewById(R.id.btn_continuar_pago);
         btn_cancelar_pago_servicio = (Button) findViewById(R.id.btn_cancelar_pago_servicio);
@@ -56,18 +58,21 @@ public class ConformidadPagoServicios extends Activity {
         tv_monto_total_servicio_pagar = (TextView) findViewById(R.id.tv_monto_total_servicio_pagar);
         txt_tipo_moneda_servicio_pagar = (TextView) findViewById(R.id.txt_tipo_moneda_servicio_pagar);
         tv_nro_servicio_servicio_pagar = (TextView) findViewById(R.id.tv_nro_servicio_servicio_pagar);
-        tv_nombre_titular_pago_servicio = (TextView) findViewById(R.id.tv_nombre_titular_pago_servicio);
+        //tv_nombre_titular_pago_servicio = (TextView) findViewById(R.id.tv_nombre_titular_pago_servicio);
         txt_tipo_servicio_pagar = (TextView) findViewById(R.id.txt_tipo_servicio_pagar);
         txt_tipo_moneda_total_pagar = (TextView) findViewById(R.id.txt_tipo_moneda_total_pagar);
         txt_tipo_moneda_comision_pagar = (TextView) findViewById(R.id.txt_tipo_moneda_comision_pagar);
         tv_dni_cliente_conformidad = (TextView) findViewById(R.id.tv_dni_cliente_conformidad);
         tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
+        titulo_conformidad_pago_servicios = (TextView) findViewById(R.id.titulo_conformidad_pago_servicios);
+        tv_importe_servicio = (TextView) findViewById(R.id.tv_importe_servicio);
+        txt_tasa_servicio_pagar = (TextView) findViewById(R.id.txt_tasa_servicio_pagar);
 
         Bundle extras = getIntent().getExtras();
         comercio = extras.getParcelable("comercio");
         num_tarjeta = extras.getString("num_tarjeta");
         emisor_tarjeta = extras.getInt("emisor_tarjeta");
-        tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
+        //tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         monto_servicio = extras.getString("monto_servicio");
         servicio = extras.getString("servicio");
         num_servicio = extras.getString("num_servicio");
@@ -78,6 +83,15 @@ public class ConformidadPagoServicios extends Activity {
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
+        tasa = extras.getInt("tasa");
+        tipoTasa = extras.getString("tipoTasa");
+
+        if (tasa == 1){
+            titulo_conformidad_pago_servicios.setText("CONFORMIDAD DE PAGO DE TASAS");
+            tv_importe_servicio.setText("IMPORTE DE TASA");
+            ll_tipo_tasa_pagar_conforme.setVisibility(View.VISIBLE);
+            txt_tasa_servicio_pagar.setText(tipoTasa);
+        }
 
         numeroUnicoArrayList = null;
         numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
@@ -90,7 +104,7 @@ public class ConformidadPagoServicios extends Activity {
         txt_tipo_moneda_servicio_pagar.setText(tipo_moneda_deuda);
         tv_nro_servicio_servicio_pagar.setText(num_servicio);
         tv_monto_total_servicio_pagar.setText(totalServicioPagar());
-        tv_nombre_titular_pago_servicio.setText(cliente);
+        //tv_nombre_titular_pago_servicio.setText(cliente);
         txt_tipo_moneda_total_pagar.setText(tipo_moneda_deuda);
         txt_tipo_moneda_comision_pagar.setText(tipo_moneda_deuda);
         tv_dni_cliente_conformidad.setText(cli_dni);
@@ -277,9 +291,9 @@ public class ConformidadPagoServicios extends Activity {
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
                 if (tipo_servicio == null) {
-                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, "-", comercio.getIdComercio(), nombre_recibo, cliente, cli_dni, tipoTarjeta(), transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, "-", comercio.getIdComercio(), nombre_recibo, cliente, cli_dni, "PIN", transformarImporteServicio(), transformarComision(), totalServicioPagar());
                 } else {
-                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, tipo_servicio, comercio.getIdComercio(), nombre_recibo, cliente, cli_dni, tipoTarjeta(), transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, tipo_servicio, comercio.getIdComercio(), nombre_recibo, cliente, cli_dni, "PIN", transformarImporteServicio(), transformarComision(), totalServicioPagar());
                 }
             } catch (Exception e) {
                 user = null;

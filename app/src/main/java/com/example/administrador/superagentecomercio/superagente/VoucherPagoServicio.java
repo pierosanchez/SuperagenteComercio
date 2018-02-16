@@ -36,7 +36,7 @@ public class VoucherPagoServicio extends Activity {
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por,
             tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
-            tv_nombre_recibo_usuario, txt_tipo_servicio_pagar_voucher, txt_numero_unico;
+            tv_nombre_recibo_usuario, txt_tipo_servicio_pagar_voucher, txt_numero_unico, txt_numero_tarjeta_voucher_servicio;
     TableRow tr_tipo_servicio_pagar;
     DecimalFormat decimal = new DecimalFormat("0.00");
     NumeroUnicoAdapter numeroUnicoAdapter;
@@ -64,7 +64,7 @@ public class VoucherPagoServicio extends Activity {
         tipo_servicio = extras.getString("tipo_servicio");
         nro_unico = extras.getString("nro_unico");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
-        tipoPago = tipoTarjeta() + " con " + validacion_tarjeta;
+        //tipoPago = tipoTarjeta() + " con " + validacion_tarjeta;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
@@ -86,13 +86,14 @@ public class VoucherPagoServicio extends Activity {
         txt_servicio_pagar_voucher = (TextView) findViewById(R.id.txt_servicio_pagar_voucher);
         tv_total_servicio_pagar_voucher = (TextView) findViewById(R.id.tv_total_servicio_pagar_voucher);
         //tv_banco_tarjeta_usuario = (TextView) findViewById(R.id.tv_banco_tarjeta_usuario);
-        txt_pagado_por = (TextView) findViewById(R.id.txt_pagado_por);
+        //txt_pagado_por = (TextView) findViewById(R.id.txt_pagado_por);
         tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
         tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
         tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
         tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
         txt_tipo_servicio_pagar_voucher = (TextView) findViewById(R.id.txt_tipo_servicio_pagar_voucher);
         txt_numero_unico = (TextView) findViewById(R.id.txt_numero_unico);
+        txt_numero_tarjeta_voucher_servicio = (TextView) findViewById(R.id.txt_numero_tarjeta_voucher_servicio);
 
         if (tipo_servicio != null){
             tr_tipo_servicio_pagar.setVisibility(View.VISIBLE);
@@ -108,13 +109,14 @@ public class VoucherPagoServicio extends Activity {
         txt_servicio_pagar_voucher.setText(servicio);
         txt_suministro_pagar_voucher.setText(num_servicio);
         tv_total_servicio_pagar_voucher.setText(totalServicioPagar());
-        tv_forma_pago.setText(tipoPago);
+        //tv_forma_pago.setText(tipoPago);
         //tv_banco_tarjeta_usuario.setText(obtenerBancoTarjeta());
-        txt_pagado_por.setText(cliente);
+        //txt_pagado_por.setText(cliente);
         tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
         tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
         tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
         tv_nombre_recibo_usuario.setText(nombre_recibo);
+        txt_numero_tarjeta_voucher_servicio.setText(num_tarjeta);
 
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override

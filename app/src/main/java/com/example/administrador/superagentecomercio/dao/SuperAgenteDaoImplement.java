@@ -28,6 +28,195 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public ArrayList<TasasMtcEntity> ListarTasasMtc() {
+        ArrayList<TasasMtcEntity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarTasasMtc/?vac09=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        TasasMtcEntity tasas = new TasasMtcEntity();
+                        tasas.setCodMtcTasa(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_mtc_tasa")));
+                        tasas.setDescMtcTasa(utils.getValueStringOrNull(jsonObject, "desc_mtc_tasa"));
+                        tipoTarjetaEntity.add(tasas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public ArrayList<TasasPjEnity> ListarTasasPj() {
+        ArrayList<TasasPjEnity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarTasasPj/?vac08=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        TasasPjEnity tasas =new TasasPjEnity();
+                        tasas.setCodPjTasa(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_pj_tasa")));
+                        tasas.setDescPjTasa(utils.getValueStringOrNull(jsonObject, "desc_pj_tasa"));
+                        tipoTarjetaEntity.add(tasas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public ArrayList<TasasPnpEntity> ListarTasasPnp() {
+        ArrayList<TasasPnpEntity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarTasasPnp/?vac07=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        TasasPnpEntity tasas = new TasasPnpEntity();
+                        tasas.setCodPnpTasa(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_pnp_tasa")));
+                        tasas.setDescPnpTasa(utils.getValueStringOrNull(jsonObject, "desc_pnp_tasa"));
+                        tipoTarjetaEntity.add(tasas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public ArrayList<TasasReniecEntity> ListarTasasReniec() {
+        ArrayList<TasasReniecEntity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarTasasReniec/?vac06=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        TasasReniecEntity tasas = new TasasReniecEntity();
+                        tasas.setCodReniecTasa(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_reniec_tasa")));
+                        tasas.setDescReniecTasa(utils.getValueStringOrNull(jsonObject, "desc_reniec_tasa"));
+                        tipoTarjetaEntity.add(tasas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public ArrayList<TasasEntity> ListarTasas() {
+        ArrayList<TasasEntity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarTasas/?vac05=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        TasasEntity tasas = new TasasEntity();
+                        tasas.setCodTasa(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tasa")));
+                        tasas.setDescTasa(utils.getValueStringOrNull(jsonObject, "desc_tasa"));
+                        tasas.setAcrotasa(utils.getValueStringOrNull(jsonObject, "acro_tasa"));
+                        tipoTarjetaEntity.add(tasas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public ArrayList<EmpresasServiciosEntity> ListarEmpresasServiciosComercio() {
+        ArrayList<EmpresasServiciosEntity> tipoTarjetaEntity = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarEmpresasServiciosComercio/?vac04=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        EmpresasServiciosEntity empresas = new EmpresasServiciosEntity();
+                        empresas.setCod_emp_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_emp_servicio")));
+                        empresas.setDes_emp_servicio(utils.getValueStringOrNull(jsonObject, "des_emp_servicio"));
+                        empresas.setCod_tipo_emps_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_emps_servicio")));
+                        empresas.setNombre_recibo(utils.getValueStringOrNull(jsonObject, "nombre_recibo"));
+                        tipoTarjetaEntity.add(empresas);
+                    }
+                } else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
     public VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni) {
         VoucherPagoServicioEntity tipoTarjetaEntity = new VoucherPagoServicioEntity();
 
@@ -345,7 +534,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     operario.setDistrito(distrito);
                     operario.setProvincia(provincia);
                     operario.setDireccion(direccion);
-                    operario.setUsu_reg(usu_reg);
+                    //operario.setUsu_reg(usu_reg);
 
                 } else {
                     operario = null;

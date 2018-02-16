@@ -1,7 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <!--<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">--> <!--ESTILO POR DEFECTO-->
+    <!-- NUEVO ESTILO QUE PERMITE QUITAR EL ACTION BAR-->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
     <style name="menu_labels_style">

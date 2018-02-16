@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuperAgenteComercio</string>
+    <string name="app_name">Agente</string>
 
     <!-- botones -->
 
@@ -152,7 +152,7 @@
     <string name="tv_ingreso_tarjeta_cliente">INGRESE EL NUMERO DE TARJETA DEL CLIENTE</string>
     <string name="rdbtn_codigo_cvv">CÓDIGO CVV</string>
     <string name="rdbtn_numero_pin">NUMERO DE PIN</string>
-    <string name="tv_ingrese">INGRESE DATO</string>
+    <string name="tv_ingrese">INGRESE PIN</string>
     <string name="titulo_voucher_pago_consumo">VOUCHER DE PAGO DE CONSUMO</string>
     <string name="tv_transaccion_exitosa">TRANSACCIÓN EXITOSA</string>
     <string name="tv_pin_verificado">PIN VERIFICADO POR EL EMISOR</string>
@@ -184,6 +184,7 @@
     <string name="tv_ingrese_pin_tarjeta_servicio">INGRESE PIN</string>
     <string name="tv_servicio_pagar">SERVICIO A PAGAR:</string>
     <string name="tv_tipo_servicio_pagar">TIPO DE SERVICIO:</string>
+    <string name="tv_tipo_tasa">TIPO DE TASA:</string>
     <string name="tv_pago_cuotas">¿PAGO EN CUOTAS?</string>
     <string name="tv_ingrese_ping">INGRESE PIN</string>
     <string name="tv_cantidad_cuotas">CANTIDAD DE CUOTAS</string>
@@ -207,6 +208,7 @@
     <string name="tv_tipo_servicio_voucher">TIPO DE SERVICIO:</string>
     <string name="tv_num_suministro_voucher">CÓDIGO DEL CLIENTE:</string>
     <string name="tv_pagado_por_voucher">PAGADO POR:</string>
+    <string name="tv_numero_tarjeta_voucher_servicio">NÚMERO DE TARJETA</string>
     <string name="tv_dni_servicios">DNI:</string>
     <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>
     <string name="tv_importe_voucher">IMPORTE:</string>

@@ -60,10 +60,14 @@ public class CambioClaveAcceso extends Activity {
                 String nueva_clave_confirmacion = txt_confirme_nueva_clave_acceso.getText().toString();
 
                 if (nueva_clave.equals(nueva_clave_confirmacion)) {
-                    CambioClaveAcceso.actualizarClaveAcceso validador = new CambioClaveAcceso.actualizarClaveAcceso();
-                    validador.execute();
+                    if (nueva_clave.length() >=8) {
+                        CambioClaveAcceso.actualizarClaveAcceso validador = new CambioClaveAcceso.actualizarClaveAcceso();
+                        validador.execute();
+                    } else {
+                        Toast.makeText(CambioClaveAcceso.this, "La contraseña debe de tener 8 dígitos como mínimo.", Toast.LENGTH_SHORT).show();
+                    }
                 } else if (!nueva_clave.equals(nueva_clave_confirmacion)) {
-                    Toast.makeText(CambioClaveAcceso.this, "No coinciden las contraseñas ingresadas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CambioClaveAcceso.this, "No coinciden las contraseñas ingresadas.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

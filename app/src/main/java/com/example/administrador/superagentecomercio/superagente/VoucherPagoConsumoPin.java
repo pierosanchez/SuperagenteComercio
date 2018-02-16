@@ -13,6 +13,8 @@ import com.example.administrador.superagentecomercio.entity.Comercio;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+
 public class VoucherPagoConsumoPin extends Activity {
 
     private String nro_unico, nomComercio, idOperario, tarjeta4, importe, hora, fecha,
@@ -21,6 +23,7 @@ public class VoucherPagoConsumoPin extends Activity {
     private TextView tv_fecha_pago, txt_hora_pago, txt_importe_voucher_consumo, txt_numero_tarjeta_voucher_consumo,
             txt_numero_unico_voucher_consumos, tv_nombre_comercio, tv_distrito_comercio, tv_nombre_operario;
     private Button btn_efectuar_otra_operacion;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class VoucherPagoConsumoPin extends Activity {
 
         tv_fecha_pago.setText(fecha);
         txt_hora_pago.setText(hora);
-        txt_importe_voucher_consumo.setText(importe);
+        txt_importe_voucher_consumo.setText(covertImporte());
         txt_numero_unico_voucher_consumos.setText(nro_unico);
         tv_distrito_comercio.setText(distritoComercio);
         tv_nombre_comercio.setText(nomComercio);
@@ -72,5 +75,9 @@ public class VoucherPagoConsumoPin extends Activity {
                 finish();
             }
         });
+    }
+
+    private String covertImporte(){
+        return decimalFormat.format(Double.parseDouble(importe));
     }
 }

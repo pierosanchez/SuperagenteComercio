@@ -2,6 +2,7 @@ package com.example.administrador.superagentecomercio.superagente;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrador.superagentecomercio.R;
@@ -36,6 +38,9 @@ public class IngresoTarjetaCliente extends Activity {
     private String nro_unico, nomComercio, idOperario, nomOperario, apePaterOperario, apeMaterOperario, distritoComercio;
     private Comercio comercio;
     private RadioButton rdbtn_visa_option, rdbtn_mc_option;
+    private String num_servicio, servicio, cliente, tipo_servicio, cli_dni, nombre_recibo, monto_servicio, _dni, tipoTasa, tipo_moneda_deuda;
+    private TextView tv_tipo_moneda_importe_voucher;
+    private int tasa;
     //rdbtn_amex_option
 
     @Override
@@ -60,8 +65,10 @@ public class IngresoTarjetaCliente extends Activity {
         txt_clave_tarjeta = (EditText) findViewById(R.id.txt_clave_tarjeta);
         tv_importe = (EditText) findViewById(R.id.tv_importe);
 
+        tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
+
         String callingActivity = this.getCallingActivity().getClassName();
-        if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")){
+        if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")) {
             Bundle bundle = getIntent().getExtras();
             comercio = bundle.getParcelable("comercio");
             nomComercio = bundle.getString("nomComercio");
@@ -71,10 +78,37 @@ public class IngresoTarjetaCliente extends Activity {
             apeMaterOperario = bundle.getString("apeMaterOperario");
             distritoComercio = bundle.getString("distritoComercio");
 
+            rdgrp_clave_tarjeta.setVisibility(View.VISIBLE);
+
             btnAceptarConsumo();
         } else if (callingActivity.equals(Constante.ACTIVITYROOT + "SeleccionRecibosPagar")) {
             Bundle bundle = getIntent().getExtras();
             comercio = bundle.getParcelable("comercio");
+            monto_servicio = bundle.getString("monto_servicio");
+            servicio = bundle.getString("servicio");
+            num_servicio = bundle.getString("num_servicio");
+            tipo_servicio = bundle.getString("tipo_servicio");
+            nombre_recibo = bundle.getString("nombre_recibo");
+            cliente = bundle.getString("cliente");
+
+            tv_importe.setText(monto_servicio);
+            tv_importe.setEnabled(false);
+
+            btnAceptarServicios();
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "SeleccionServicioPagar")) {
+            Bundle bundle = getIntent().getExtras();
+            comercio = bundle.getParcelable("comercio");
+            monto_servicio = bundle.getString("monto_servicio");
+            servicio = bundle.getString("servicio");
+            num_servicio = bundle.getString("num_servicio");
+            tipo_servicio = bundle.getString("tipo_servicio");
+            nombre_recibo = bundle.getString("nombre_recibo");
+            cliente = bundle.getString("cliente");
+            tasa = bundle.getInt("tasa");
+            tipoTasa = bundle.getString("tipoTasa");
+            tv_importe.setText(monto_servicio);
+            tv_importe.setEnabled(false);
+            tv_importe.setTypeface(null, Typeface.BOLD);
 
             btnAceptarServicios();
         }
@@ -96,14 +130,6 @@ public class IngresoTarjetaCliente extends Activity {
             }
         });
 
-        /*rdbtn_amex_option.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rdbtn_visa_option.setChecked(false);
-                rdbtn_mc_option.setChecked(false);
-            }
-        });*/
-
         rdbtn_visa_option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +137,47 @@ public class IngresoTarjetaCliente extends Activity {
                 rdbtn_mc_option.setChecked(false);
             }
         });
+
+        txt_numero_dni.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (txt_numero_dni.length() == 8) {
+                    txt_digito_control_dni.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        txt_digito_control_dni.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (txt_digito_control_dni.length() == 1) {
+                    txt_clave_tarjeta.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
-    private void btnAceptarConsumo(){
+    private void btnAceptarConsumo() {
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,26 +198,26 @@ public class IngresoTarjetaCliente extends Activity {
                     ingresoVoucher.execute();
                 } else if (numeroTarjeta.length() != 16 && !rdbtn_mc_option.isChecked() //&& !rdbtn_amex_option.isChecked()
                         && !rdbtn_visa_option.isChecked() && dni.length() == 0 && digitoControDNI.length() == 0
-                        && clave.length() == 0 && importe.length() == 0){
+                        && clave.length() == 0 && importe.length() == 0) {
                     Toast.makeText(IngresoTarjetaCliente.this, "Ingrese los datos", Toast.LENGTH_LONG).show();
                 } else {
                     if (numeroTarjeta.length() != 16) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Número de tarjeta inválido", Toast.LENGTH_LONG).show();
                     }
                     if (!rdbtn_mc_option.isChecked() //&& !rdbtn_amex_option.isChecked()
-                            && !rdbtn_visa_option.isChecked()){
+                            && !rdbtn_visa_option.isChecked()) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Seleccione la marca de la tarjeta", Toast.LENGTH_LONG).show();
                     }
-                    if (dni.length() == 0){
+                    if (dni.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el número de DNI", Toast.LENGTH_LONG).show();
                     }
-                    if (digitoControDNI.length() == 0){
+                    if (digitoControDNI.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el dígito de control del DNI", Toast.LENGTH_LONG).show();
                     }
-                    if (clave.length() == 0){
+                    if (clave.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese la clave de la tarjeta", Toast.LENGTH_LONG).show();
                     }
-                    if (importe.length() == 0){
+                    if (importe.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el importe a pagar", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -161,7 +225,7 @@ public class IngresoTarjetaCliente extends Activity {
         });
     }
 
-    private void btnAceptarServicios(){
+    private void btnAceptarServicios() {
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,32 +242,45 @@ public class IngresoTarjetaCliente extends Activity {
                 if (numeroTarjeta.length() == 16 && rdbtn_mc_option.isChecked() //|| rdbtn_amex_option.isChecked()
                         || rdbtn_visa_option.isChecked() && dni.length() != 0 && digitoControDNI.length() != 0
                         && clave.length() != 0 && importe.length() != 0) {
-                    Intent intent = new Intent(IngresoTarjetaCliente.this, MontoPagoPinPagoServicios.class);
+                    tipo_moneda_deuda = "S./";
+                    Intent intent = new Intent(IngresoTarjetaCliente.this, ConformidadPagoServicios.class);
                     intent.putExtra("comercio", comercio);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("monto_servicio", monto_servicio);
+                    intent.putExtra("servicio", servicio);
+                    intent.putExtra("num_servicio", num_servicio);
+                    intent.putExtra("tipo_servicio", tipo_servicio);
+                    intent.putExtra("nombre_recibo", nombre_recibo);
+                    intent.putExtra("cli_dni", dni + " - " + digitoControDNI);
+                    intent.putExtra("num_tarjeta", "**** - ***** - **** - " + tarjeta4);
+                    intent.putExtra("tipo_tarjeta_pago", 1);
+                    intent.putExtra("tasa", tasa);
+                    intent.putExtra("tipoTasa", tipoTasa);
+                    intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
                     startActivity(intent);
                     finish();
                 } else if (numeroTarjeta.length() != 16 && !rdbtn_mc_option.isChecked() //&& !rdbtn_amex_option.isChecked()
                         && !rdbtn_visa_option.isChecked() && dni.length() == 0 && digitoControDNI.length() == 0
-                        && clave.length() == 0 && importe.length() == 0){
+                        && clave.length() == 0 && importe.length() == 0) {
                     Toast.makeText(IngresoTarjetaCliente.this, "Ingrese los datos", Toast.LENGTH_LONG).show();
                 } else {
                     if (numeroTarjeta.length() != 16) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Número de tarjeta inválido", Toast.LENGTH_LONG).show();
                     }
                     if (!rdbtn_mc_option.isChecked() //&& !rdbtn_amex_option.isChecked()
-                            && !rdbtn_visa_option.isChecked()){
+                            && !rdbtn_visa_option.isChecked()) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Seleccione la marca de la tarjeta", Toast.LENGTH_LONG).show();
                     }
-                    if (dni.length() == 0){
+                    if (dni.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el número de DNI", Toast.LENGTH_LONG).show();
                     }
-                    if (digitoControDNI.length() == 0){
+                    if (digitoControDNI.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el dígito de control del DNI", Toast.LENGTH_LONG).show();
                     }
-                    if (clave.length() == 0){
+                    if (clave.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese la clave de la tarjeta", Toast.LENGTH_LONG).show();
                     }
-                    if (importe.length() == 0){
+                    if (importe.length() == 0) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Ingrese el importe a pagar", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -325,12 +402,12 @@ public class IngresoTarjetaCliente extends Activity {
 
     private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoConsumo> {
 
-        String importe = tv_importe.getText().toString();
+        String importe = tv_tipo_moneda_importe_voucher.getText().toString() + " " + tv_importe.getText().toString();
         String tarjeta1 = nroTarjetaDigito1.getText().toString();
         String tarjeta2 = nroTarjetaDigito2.getText().toString();
         String tarjeta3 = nroTarjetaDigito3.getText().toString();
         String tarjeta4 = nroTarjetaDigito4.getText().toString();
-        String numeroTarjeta = tarjeta1 + tarjeta2 + tarjeta3 + tarjeta4;
+        String numeroTarjeta = "**** - **** - **** - " + tarjeta4;
 
         @Override
         protected VoucherPagoConsumo doInBackground(String... params) {
