@@ -180,6 +180,26 @@
                     </TableRow>
 
                     <TableRow
+                        android:id="@+id/tr_tipo_tasa"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tv_tipo_tasa_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_tipo_servicio_voucher" />
+
+                        <TextView
+                            android:id="@+id/tv_tipo_tasa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="wrap_content"
                         android:layout_marginLeft="20dp">
 
@@ -249,7 +269,7 @@
 
                     </TableRow>
 
-                    <TableRow
+                    <!--<TableRow
                         android:layout_width="wrap_content"
                         android:layout_marginLeft="20dp">
 
@@ -265,7 +285,7 @@
                             android:layout_marginLeft="5dp"
                             android:text="TARJETA CON PIN" />
 
-                    </TableRow>
+                    </TableRow>-->
 
                 </TableLayout>
 

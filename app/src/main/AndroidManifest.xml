@@ -50,7 +50,9 @@
         <activity android:name=".superagente.SeleccionRecibosPagar" />
         <activity android:name=".superagente.MontoPagoPinPagoServicios" />
         <activity android:name=".superagente.ConformidadPagoServicios" />
-        <activity android:name=".superagente.VoucherPagoServicio"></activity>
+        <activity android:name=".superagente.VoucherPagoServicio" />
+        <activity android:name=".superagente.VoucherPagoConsumoFirma" />
+        <activity android:name=".superagente.CaptureSignature"></activity>
     </application>
 
 </manifest>

@@ -140,6 +140,7 @@ public class ConformidadPagoServicios extends Activity {
                 intent.putExtra("nombre_recibo", nombre_recibo);
                 intent.putExtra("nro_unico", nro_unico);
                 intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                intent.putExtra("tipoTasa", tipoTasa);
                 startActivity(intent);
                 finish();
             }

@@ -37,7 +37,7 @@ public class IngresoTarjetaCliente extends Activity {
     private ArrayList<NumeroUnico> numeroUnicoArrayList;
     private String nro_unico, nomComercio, idOperario, nomOperario, apePaterOperario, apeMaterOperario, distritoComercio;
     private Comercio comercio;
-    private RadioButton rdbtn_visa_option, rdbtn_mc_option;
+    private RadioButton rdbtn_visa_option, rdbtn_mc_option, rdbtn_codigo_cvv, rdbtn_numero_pin;
     private String num_servicio, servicio, cliente, tipo_servicio, cli_dni, nombre_recibo, monto_servicio, _dni, tipoTasa, tipo_moneda_deuda;
     private TextView tv_tipo_moneda_importe_voucher;
     private int tasa;
@@ -55,6 +55,8 @@ public class IngresoTarjetaCliente extends Activity {
         rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
         //rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
         rdbtn_mc_option = (RadioButton) findViewById(R.id.rdbtn_mc_option);
+        rdbtn_codigo_cvv = (RadioButton) findViewById(R.id.rdbtn_codigo_cvv);
+        rdbtn_numero_pin = (RadioButton) findViewById(R.id.rdbtn_numero_pin);
 
         nroTarjetaDigito1 = (EditText) findViewById(R.id.nroTarjetaDigito1);
         nroTarjetaDigito2 = (EditText) findViewById(R.id.nroTarjetaDigito2);
@@ -193,7 +195,8 @@ public class IngresoTarjetaCliente extends Activity {
 
                 if (numeroTarjeta.length() == 16 && rdbtn_mc_option.isChecked() //|| rdbtn_amex_option.isChecked()
                         || rdbtn_visa_option.isChecked() && dni.length() != 0 && digitoControDNI.length() != 0
-                        && clave.length() != 0 && importe.length() != 0) {
+                        && clave.length() != 0 && importe.length() != 0 && rdbtn_numero_pin.isChecked()
+                        || rdbtn_codigo_cvv.isChecked()) {
                     IngresoTarjetaCliente.ingresarVoucher ingresoVoucher = new IngresoTarjetaCliente.ingresarVoucher();
                     ingresoVoucher.execute();
                 } else if (numeroTarjeta.length() != 16 && !rdbtn_mc_option.isChecked() //&& !rdbtn_amex_option.isChecked()
@@ -201,6 +204,9 @@ public class IngresoTarjetaCliente extends Activity {
                         && clave.length() == 0 && importe.length() == 0) {
                     Toast.makeText(IngresoTarjetaCliente.this, "Ingrese los datos", Toast.LENGTH_LONG).show();
                 } else {
+                    if (!rdbtn_numero_pin.isChecked() && !rdbtn_codigo_cvv.isChecked()){
+                        Toast.makeText(IngresoTarjetaCliente.this, "Seleccione el tipo de pago", Toast.LENGTH_LONG).show();
+                    }
                     if (numeroTarjeta.length() != 16) {
                         Toast.makeText(IngresoTarjetaCliente.this, "Número de tarjeta inválido", Toast.LENGTH_LONG).show();
                     }
@@ -426,21 +432,39 @@ public class IngresoTarjetaCliente extends Activity {
         @Override
         protected void onPostExecute(VoucherPagoConsumo voucherPagoConsumo) {
             if (voucherPagoConsumo.getRptaC().equals("00")) {
-                Intent intent = new Intent(IngresoTarjetaCliente.this, VoucherPagoConsumoPin.class);
-                intent.putExtra("comercio", comercio);
-                intent.putExtra("nomComercio", nomComercio);
-                intent.putExtra("idOperario", idOperario);
-                intent.putExtra("nomOperario", nomOperario);
-                intent.putExtra("apePaterOperario", apePaterOperario);
-                intent.putExtra("apeMaterOperario", apeMaterOperario);
-                intent.putExtra("distritoComercio", distritoComercio);
-                intent.putExtra("nro_unico", nro_unico);
-                intent.putExtra("tarjeta4", tarjeta4);
-                intent.putExtra("importe", importe);
-                intent.putExtra("hora", obtenerHora());
-                intent.putExtra("fecha", obtenerFecha());
-                startActivity(intent);
-                finish();
+                if (rdbtn_numero_pin.isChecked()) {
+                    Intent intent = new Intent(IngresoTarjetaCliente.this, VoucherPagoConsumoPin.class);
+                    intent.putExtra("comercio", comercio);
+                    intent.putExtra("nomComercio", nomComercio);
+                    intent.putExtra("idOperario", idOperario);
+                    intent.putExtra("nomOperario", nomOperario);
+                    intent.putExtra("apePaterOperario", apePaterOperario);
+                    intent.putExtra("apeMaterOperario", apeMaterOperario);
+                    intent.putExtra("distritoComercio", distritoComercio);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("tarjeta4", tarjeta4);
+                    intent.putExtra("importe", tv_importe.getText().toString());
+                    intent.putExtra("hora", obtenerHora());
+                    intent.putExtra("fecha", obtenerFecha());
+                    startActivity(intent);
+                    finish();
+                } else if (rdbtn_codigo_cvv.isChecked()){
+                    Intent intent = new Intent(IngresoTarjetaCliente.this, VoucherPagoConsumoFirma.class);
+                    intent.putExtra("comercio", comercio);
+                    intent.putExtra("nomComercio", nomComercio);
+                    intent.putExtra("idOperario", idOperario);
+                    intent.putExtra("nomOperario", nomOperario);
+                    intent.putExtra("apePaterOperario", apePaterOperario);
+                    intent.putExtra("apeMaterOperario", apeMaterOperario);
+                    intent.putExtra("distritoComercio", distritoComercio);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("tarjeta4", tarjeta4);
+                    intent.putExtra("importe", tv_importe.getText().toString());
+                    intent.putExtra("hora", obtenerHora());
+                    intent.putExtra("fecha", obtenerFecha());
+                    startActivity(intent);
+                    finish();
+                }
             }
         }
     }

@@ -215,6 +215,8 @@
     <string name="tv_comision_operacion_voucher">COMISIÓN:</string>
     <string name="tv_total_servicio_pagar_voucher">TOTAL:</string>
     <string name="tv_gracias_preferencia">*** GRACIAS POR SU PREFERENCIA ***</string>
+    <string name="btn_firmar">FIRMAR</string>
+    <string name="tv_titulo_ingresar_firma">INGRESE SU FIRMA</string>
 
 
 </resources>

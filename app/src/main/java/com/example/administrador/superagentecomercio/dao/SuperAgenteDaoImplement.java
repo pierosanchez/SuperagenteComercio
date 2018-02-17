@@ -1297,9 +1297,9 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     + "&direccionComercio=" + URLEncoder.encode(direccionComercio, "UTF-8")
                     + "&representanteComercio=" + URLEncoder.encode(representanteComercio, "UTF-8")
                     + "&dniRepresentante=" + URLEncoder.encode(dniRepresentante, "UTF-8")
-                    + "&departamento=" + departamento
-                    + "&provincia=" + provincia
-                    + "&distrito=" + distrito;
+                    + "&departamento=" + URLEncoder.encode(departamento, "UTF-8")
+                    + "&provincia=" + URLEncoder.encode(provincia, "UTF-8")
+                    + "&distrito=" + URLEncoder.encode(distrito, "UTF-8");
 
             Log.e("METHOD", "InsertarComercio");
             Log.e("URL", url);
